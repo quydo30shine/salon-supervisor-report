@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Báo cáo nghiệm thu Salon Supervisor</title>
+<style>
+  :root{
+    --bg:#0f1220; --card:#191d2e; --card2:#222740; --line:#2c3350;
+    --txt:#e8eaf2; --muted:#9aa3c0; --accent:#5b8cff; --green:#34d399; --amber:#fbbf24; --red:#f87171;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--bg);color:var(--txt);font-size:14px}
+  a{color:var(--accent)}
+  header{padding:20px 24px;border-bottom:1px solid var(--line);background:var(--card)}
+  header h1{margin:0 0 4px;font-size:20px}
+  header .sub{color:var(--muted);font-size:13px}
+  .wrap{max-width:1280px;margin:0 auto;padding:20px 24px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .stat .n{font-size:26px;font-weight:700}
+  .stat .l{color:var(--muted);font-size:12px;margin-top:2px}
+  .filters{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px;align-items:flex-end}
+  .filters label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
+  select,input{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;min-width:160px}
+  .btn{background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:13px}
+  .btn:hover{border-color:var(--accent)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden}
+  th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:13px;vertical-align:middle}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.4px;cursor:pointer;user-select:none}
+  tr.row{cursor:pointer}
+  tr.row:hover{background:var(--card2)}
+  .bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden;min-width:90px}
+  .bar > i{display:block;height:100%}
+  .pct{font-variant-numeric:tabular-nums;font-weight:600;margin-left:8px}
+  .pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;background:var(--card2);border:1px solid var(--line)}
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow:auto;z-index:50}
+  .overlay.on{display:flex}
+  .modal{background:var(--card);border:1px solid var(--line);border-radius:14px;max-width:920px;width:100%;padding:22px}
+  .modal h2{margin:0 0 2px;font-size:18px}
+  .modal .meta{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .checkitem{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;background:var(--card2)}
+  .checkitem .head{display:flex;align-items:center;gap:10px;justify-content:space-between}
+  .checkitem .name{font-weight:600}
+  .badge{font-size:11px;padding:2px 9px;border-radius:20px;font-weight:600}
+  .badge.ok{background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.4)}
+  .badge.no{background:rgba(248,113,113,.12);color:var(--red);border:1px solid rgba(248,113,113,.35)}
+  .thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .thumbs img{width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid var(--line);cursor:pointer;background:#000}
+  .nophoto{font-size:12px;color:var(--muted);margin-top:8px}
+  .close{float:right;cursor:pointer;color:var(--muted);font-size:22px;line-height:1}
+  .note{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:8px 10px;margin:6px 0;font-size:13px}
+  /* lightbox */
+  .lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:80}
+  .lb.on{display:flex}
+  .lb img{max-width:92vw;max-height:92vh;border-radius:8px}
+  .empty{padding:40px;text-align:center;color:var(--muted)}
+  .src-warn{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);color:#fde68a;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>📋 Báo cáo nghiệm thu Salon Supervisor — Ngành hàng Uốn Nhuộm Dưỡng</h1>
+  <div class="sub" id="genAt">Đang tải…</div>
+</header>
+
+<div class="wrap">
+  <div id="srcWarn"></div>
+
+  <div class="cards" id="stats"></div>
+
+  <div class="filters">
+    <label>Salesup
+      <select id="fSalesup"><option value="">— Tất cả —</option></select>
+    </label>
+    <label>Salon
+      <select id="fSalon"><option value="">— Tất cả —</option></select>
+    </label>
+    <label>Ngày
+      <select id="fDate"><option value="">— Tất cả —</option></select>
+    </label>
+    <label>Tìm kiếm
+      <input id="fSearch" type="text" placeholder="salon / salesup…">
+    </label>
+    <button class="btn" id="reset">↺ Đặt lại</button>
+  </div>
+
+  <table id="tbl">
+    <thead>
+      <tr>
+        <th data-k="date">Ngày</th>
+        <th data-k="salesup">Salesup</th>
+        <th data-k="salon">Salon</th>
+        <th data-k="completion">Tiến độ checklist</th>
+        <th data-k="photos">Ảnh</th>
+        <th>Chi tiết</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <div class="empty" id="empty" style="display:none">Không có dữ liệu phù hợp bộ lọc.</div>
+</div>
+
+<!-- modal chi tiết -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+<!-- lightbox -->
+<div class="lb" id="lb"><img id="lbImg" src="" alt=""></div>
+
+<script>
+let DATA = null, CHECK = [], VIEW = [];
+let sortKey = 'date', sortDir = 1;
+
+function pctColor(p){ return p>=0.85?'var(--green)':p>=0.5?'var(--amber)':'var(--red)'; }
+
+function load(){
+  fetch('data.json?_=' + Date.now())
+    .then(r=>r.json())
+    .then(d=>{ DATA=d; CHECK=d.checklist_items||[]; init(); })
+    .catch(e=>{ document.getElementById('rows').innerHTML =
+      '<tr><td colspan="6" class="empty">Không đọc được data.json — chạy đồng bộ trước.</td></tr>'; });
+}
+
+function init(){
+  document.getElementById('genAt').textContent =
+    'Cập nhật: ' + (DATA.generated_at||'?') + '  •  ' + (DATA.visits||[]).length + ' lượt đi salon';
+  if((DATA.source||'')==='csv-sample'){
+    document.getElementById('srcWarn').innerHTML =
+      '<div class="src-warn">⚠️ Đây là dữ liệu MẪU từ CSV, ảnh chưa hiển thị. Sau khi nối Lark API và chạy đồng bộ, ảnh thật sẽ tự xuất hiện.</div>';
+  }
+  // fill filters
+  fillSelect('fSalesup', uniq('salesup'));
+  fillSelect('fSalon', uniq('salon'));
+  fillSelect('fDate', uniq('date'));
+  ['fSalesup','fSalon','fDate'].forEach(id=>document.getElementById(id).onchange=render);
+  document.getElementById('fSearch').oninput=render;
+  document.getElementById('reset').onclick=()=>{
+    ['fSalesup','fSalon','fDate','fSearch'].forEach(id=>document.getElementById(id).value='');
+    render();
+  };
+  document.querySelectorAll('#tbl th[data-k]').forEach(th=>{
+    th.onclick=()=>{ const k=th.dataset.k; if(sortKey===k) sortDir*=-1; else {sortKey=k;sortDir=1;} render(); };
+  });
+  document.getElementById('overlay').onclick=e=>{ if(e.target.id==='overlay') closeModal(); };
+  document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+  render();
+}
+
+function uniq(k){ return [...new Set((DATA.visits||[]).map(v=>v[k]).filter(Boolean))].sort(); }
+function fillSelect(id, arr){
+  const s=document.getElementById(id);
+  arr.forEach(x=>{ const o=document.createElement('option'); o.value=x; o.textContent=x; s.appendChild(o); });
+}
+
+function photosCount(v){ return CHECK.reduce((n,c)=>n+((v.items[c.key]||{}).count||0),0); }
+function doneCount(v){ return CHECK.reduce((n,c)=>n+((v.items[c.key]||{}).done?1:0),0); }
+
+function render(){
+  const fs=val('fSalesup'), fl=val('fSalon'), fd=val('fDate'), q=val('fSearch').toLowerCase().trim();
+  VIEW=(DATA.visits||[]).filter(v=>
+    (!fs||v.salesup===fs)&&(!fl||v.salon===fl)&&(!fd||v.date===fd)&&
+    (!q||(v.salon+' '+v.salesup).toLowerCase().includes(q))
+  );
+  VIEW.sort((a,b)=>{
+    let x,y;
+    if(sortKey==='completion'){x=a.completion;y=b.completion;}
+    else if(sortKey==='photos'){x=photosCount(a);y=photosCount(b);}
+    else {x=(a[sortKey]||'');y=(b[sortKey]||'');}
+    return (x>y?1:x<y?-1:0)*sortDir;
+  });
+  renderStats();
+  const rows=document.getElementById('rows');
+  rows.innerHTML='';
+  VIEW.forEach((v,i)=>{
+    const p=v.completion, tr=document.createElement('tr'); tr.className='row';
+    tr.innerHTML=`
+      <td>${esc(v.date||'—')}</td>
+      <td>${esc(v.salesup||'—')}</td>
+      <td><b>${esc(v.salon||'—')}</b></td>
+      <td><div style="display:flex;align-items:center">
+        <div class="bar"><i style="width:${Math.round(p*100)}%;background:${pctColor(p)}"></i></div>
+        <span class="pct" style="color:${pctColor(p)}">${Math.round(p*100)}%</span>
+        <span class="pill" style="margin-left:8px">${doneCount(v)}/${CHECK.length}</span>
+      </div></td>
+      <td>${photosCount(v)} ảnh</td>
+      <td><button class="btn">Xem ›</button></td>`;
+    tr.onclick=()=>openModal(v);
+    rows.appendChild(tr);
+  });
+  document.getElementById('empty').style.display=VIEW.length?'none':'block';
+}
+
+function renderStats(){
+  const all=DATA.visits||[];
+  const set=VIEW.length?VIEW:all;
+  const avg=set.length? set.reduce((s,v)=>s+v.completion,0)/set.length : 0;
+  const salons=new Set(set.map(v=>v.salon)).size;
+  const sups=new Set(set.map(v=>v.salesup)).size;
+  const photos=set.reduce((s,v)=>s+photosCount(v),0);
+  const c=document.getElementById('stats');
+  c.innerHTML=`
+    ${stat(set.length,'Lượt đi salon')}
+    ${stat(salons,'Salon đã đi')}
+    ${stat(sups,'Salesup')}
+    ${stat(Math.round(avg*100)+'%','Tiến độ TB checklist')}
+    ${stat(photos,'Ảnh nghiệm thu')}`;
+}
+function stat(n,l){ return `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`; }
+
+function openModal(v){
+  const m=document.getElementById('modal');
+  let items='';
+  CHECK.forEach(c=>{
+    const it=v.items[c.key]||{done:false,images:[],count:0,raw:''};
+    let thumbs='';
+    if(it.images&&it.images.length){
+      thumbs='<div class="thumbs">'+it.images.map(src=>
+        `<img src="${esc(src)}" loading="lazy" onerror="this.style.display='none'" onclick="zoom('${esc(src)}')">`).join('')+'</div>';
+    } else if(it.count){
+      thumbs=`<div class="nophoto">📎 ${it.count} ảnh (chưa đồng bộ từ Lark)${it.raw?': '+esc(it.raw):''}</div>`;
+    } else {
+      thumbs='<div class="nophoto">— chưa có —</div>';
+    }
+    items+=`<div class="checkitem">
+      <div class="head"><span class="name">${esc(c.label)}</span>
+        <span class="badge ${it.done?'ok':'no'}">${it.done?'✓ Hoàn thành':'✗ Thiếu'}</span></div>
+      ${thumbs}</div>`;
+  });
+  let extra='';
+  if(v.missing_materials) extra+=`<div class="note">⚠️ Vật tư thiếu: ${esc(v.missing_materials)}</div>`;
+  if(v.skinner_checked) extra+=`<div class="pill">Skinner chấm: ${esc(v.skinner_checked)}</div> `;
+  if(v.skinner_trained) extra+=`<div class="pill">Đào tạo: ${esc(v.skinner_trained)}</div>`;
+  m.innerHTML=`
+    <span class="close" onclick="closeModal()">×</span>
+    <h2>${esc(v.salon||'—')} <span class="pill" style="font-size:13px">${Math.round(v.completion*100)}% • ${doneCount(v)}/${CHECK.length}</span></h2>
+    <div class="meta">${esc(v.date||'')} • Salesup: ${esc(v.salesup||'')} ${v.submitted_on?'• Nộp: '+esc(v.submitted_on):''}</div>
+    ${extra?'<div style="margin-bottom:14px">'+extra+'</div>':''}
+    ${items}`;
+  document.getElementById('overlay').classList.add('on');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('on'); }
+function zoom(src){ document.getElementById('lbImg').src=src; document.getElementById('lb').classList.add('on'); }
+
+function val(id){ return document.getElementById(id).value; }
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+load();
+</script>
+</body>
+</html>
