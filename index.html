@@ -120,7 +120,7 @@
           <th>Salon</th>
           <th>Salesup phụ trách</th>
           <th>Cụm</th>
-          <th>Số lần đi (mục tiêu ≥3)</th>
+          <th>Nghiệm thu / Mục tiêu</th>
           <th>Đào tạo</th>
           <th>Tiến độ TB</th>
           <th>Ảnh</th>
@@ -144,7 +144,7 @@
 let DATA = null, CHECK = [], VIEW = [];
 let sortKey = 'date', sortDir = 1;
 let TAB = 'visits';
-let ASSIGN = [], TARGET = 3;
+let ASSIGN = [], TOFF = 3, TON = 1;
 const ASSIGN_MAP = new Map();
 function skey(s){ return (s||'').trim().toUpperCase().replace(/\s+/g,' '); }
 
@@ -156,7 +156,7 @@ function load(){
     fetch('assignments.json?_=' + Date.now()).then(r=>r.json()).catch(()=>({target_visits:3,assignments:[]}))
   ]).then(([d,a])=>{
     DATA=d; CHECK=d.checklist_items||[];
-    ASSIGN=a.assignments||[]; TARGET=a.target_visits||3;
+    ASSIGN=a.assignments||[]; TOFF=a.target_offline||3; TON=a.target_online||1;
     ASSIGN.forEach(x=>ASSIGN_MAP.set(skey(x.salon),x));
     init();
   }).catch(e=>{ document.getElementById('rows').innerHTML =
@@ -252,39 +252,53 @@ function renderSalon(){
   VIEW.forEach(v=>{ const k=skey(v.salon); if(!byS.has(k)) byS.set(k,[]); byS.get(k).push(v); });
   // danh sách salon = theo phân cụm (nhiệm vụ); fallback theo salon đã đi nếu chưa có phân cụm
   let base = ASSIGN.length ? ASSIGN.slice()
-    : [...byS.keys()].map(k=>({salon:byS.get(k)[0].salon,supervisor:'',cluster:'',online:''}));
+    : [...byS.keys()].map(k=>({salon:byS.get(k)[0].salon,supervisor:'',cluster:'',type:'',target:0,has_sup:false}));
   base = base.filter(a => (!fs||a.supervisor===fs) && (!fl||a.salon===fl));
+  const typeOrder={offline:0, online:1, '':2};
   const rows = base.map(a=>{
     const vs = byS.get(skey(a.salon)) || [];
+    const tgt = a.target||0;
     return {
-      a, vs,
+      a, vs, tgt,
       count: vs.length,
       trained: vs.reduce((s,v)=>s+sumNumbers(v.skinner_trained),0),
       avg: vs.length ? vs.reduce((s,v)=>s+v.completion,0)/vs.length : 0,
       photos: vs.reduce((s,v)=>s+photosCount(v),0),
-      done: vs.length >= TARGET,
+      done: tgt>0 && vs.length>=tgt,
     };
-  }).sort((x,y)=> x.count-y.count || x.a.salon.localeCompare(y.a.salon)); // chưa đạt lên đầu
-  // KPI tổng
-  const achieved=rows.filter(r=>r.done).length;
-  const zero=rows.filter(r=>r.count===0).length;
+  }).sort((x,y)=>
+    (typeOrder[x.a.type]??2)-(typeOrder[y.a.type]??2)   // offline trước, rồi online, rồi chưa có salesup
+    || x.count-y.count                                  // trong mỗi nhóm: chưa đạt lên đầu
+    || x.a.salon.localeCompare(y.a.salon));
+  // KPI theo loại
+  const off=rows.filter(r=>r.a.type==='offline'), on=rows.filter(r=>r.a.type==='online');
+  const offOk=off.filter(r=>r.done).length, onOk=on.filter(r=>r.done).length;
+  const nosup=rows.filter(r=>!r.a.has_sup).length;
   document.getElementById('salonKpi').innerHTML=
-    `<span class="pill" style="background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);color:var(--green)">✅ Đạt mục tiêu ≥${TARGET} lần: ${achieved}/${rows.length} salon</span>
-     <span class="pill" style="margin-left:8px;color:var(--amber)">⏳ Đang dở: ${rows.length-achieved-zero}</span>
-     <span class="pill" style="margin-left:8px;color:var(--red)">❌ Chưa đi: ${zero}</span>`;
+    `<span class="pill" style="background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);color:var(--green)">🏢 Offline đạt ≥${TOFF} lần: ${offOk}/${off.length}</span>
+     <span class="pill" style="margin-left:8px;background:rgba(91,140,255,.15);border-color:rgba(91,140,255,.4);color:var(--accent)">💻 Online đạt ≥${TON} lần: ${onOk}/${on.length}</span>
+     <span class="pill" style="margin-left:8px;color:var(--muted)">👤 Chưa có salesup: ${nosup}</span>`;
   const tb=document.getElementById('salonRows'); tb.innerHTML='';
   rows.forEach(r=>{
-    const p=Math.min(r.count/TARGET,1);
-    const col=r.done?'var(--green)':r.count>0?'var(--amber)':'var(--red)';
+    const tag = r.a.type==='offline'?'🏢 offline' : r.a.type==='online'?'💻 online' : '';
+    let cell;
+    if(r.tgt>0){
+      const p=Math.min(r.count/r.tgt,1);
+      const col=r.done?'var(--green)':r.count>0?'var(--amber)':'var(--red)';
+      cell=`<div style="display:flex;align-items:center">
+        <div class="bar"><i style="width:${Math.round(p*100)}%;background:${col}"></i></div>
+        <span class="pct" style="color:${col}">${r.count}/${r.tgt}</span></div>`;
+    } else {
+      cell=`<span class="pct" style="color:var(--muted)">${r.count} • —</span>`;
+    }
+    const supHtml = r.a.has_sup ? esc(r.a.supervisor)
+      : `<span style="color:var(--muted);font-style:italic">${esc(r.a.supervisor)}</span>`;
     const tr=document.createElement('tr'); tr.className='row';
     tr.innerHTML=`
-      <td><b>${esc(r.a.salon)}</b>${r.a.online?` <span class="pill" style="font-size:10px">${esc(r.a.online)}</span>`:''}</td>
-      <td>${esc(r.a.supervisor||'—')}</td>
+      <td><b>${esc(r.a.salon)}</b>${tag?` <span class="pill" style="font-size:10px">${tag}</span>`:''}</td>
+      <td>${supHtml}</td>
       <td style="color:var(--muted)">${esc(r.a.cluster||'—')}</td>
-      <td><div style="display:flex;align-items:center">
-        <div class="bar"><i style="width:${Math.round(p*100)}%;background:${col}"></i></div>
-        <span class="pct" style="color:${col}">${r.count}/${TARGET}</span>
-      </div></td>
+      <td>${cell}</td>
       <td>${r.trained||'—'}</td>
       <td><span class="pct" style="color:${r.vs.length?pctColor(r.avg):'var(--muted)'}">${r.vs.length?Math.round(r.avg*100)+'%':'—'}</span></td>
       <td>${r.photos} ảnh</td>
@@ -307,10 +321,12 @@ function openSalonModal(r){
         <div class="nophoto">${photosCount(v)} ảnh${v.skinner_trained?' • Đào tạo: '+esc(v.skinner_trained):''}${v.missing_materials?' • ⚠️ thiếu: '+esc(v.missing_materials):''}</div>
       </div>`).join('')
     : '<div class="nophoto">Chưa có lần đi nào.</div>';
+  const tgtTxt = r.tgt>0 ? `${r.count}/${r.tgt} lần` : `${r.count} lần • không có mục tiêu`;
+  const typeTxt = a.type==='offline'?'🏢 offline (≥'+TOFF+' lần)' : a.type==='online'?'💻 online (≥'+TON+' lần)' : '';
   m.innerHTML=`
     <span class="close" onclick="closeModal()">×</span>
-    <h2>🏪 ${esc(a.salon)} <span class="badge ${r.done?'ok':'no'}">${r.count}/${TARGET} lần</span></h2>
-    <div class="meta">Salesup phụ trách: <b>${esc(a.supervisor||'—')}</b> • Cụm: ${esc(a.cluster||'—')}${a.online?' • '+esc(a.online):''} • Tổng đào tạo: ${r.trained} • ${r.photos} ảnh</div>
+    <h2>🏪 ${esc(a.salon)} <span class="badge ${r.done?'ok':'no'}">${tgtTxt}</span></h2>
+    <div class="meta">Salesup phụ trách: <b>${esc(a.supervisor||'—')}</b> • Cụm: ${esc(a.cluster||'—')}${typeTxt?' • '+typeTxt:''} • Tổng đào tạo: ${r.trained} • ${r.photos} ảnh</div>
     <div style="color:var(--muted);font-size:12px;margin:10px 0 8px">Lịch sử đi (bấm để xem chi tiết nghiệm thu):</div>
     ${list}`;
   document.getElementById('overlay').classList.add('on');
