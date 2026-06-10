@@ -1,0 +1,353 @@
+{
+  "target_visits": 3,
+  "assignments": [
+    {
+      "salon": "109 TQH",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "264 LLQ",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "90 NH",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "362 NGT BN",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Tỉnh phía Bắc",
+      "online": "offline"
+    },
+    {
+      "salon": "4 LQD BN",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Tỉnh phía Bắc",
+      "online": "offline"
+    },
+    {
+      "salon": "116 TK",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Phía Đông Hà Nội",
+      "online": ""
+    },
+    {
+      "salon": "346 KT",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Phía Nam Hà Nội",
+      "online": ""
+    },
+    {
+      "salon": "55A NVL",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Phía Đông Hà Nội",
+      "online": ""
+    },
+    {
+      "salon": "363 LNQ TN",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Tỉnh phía Bắc",
+      "online": "online"
+    },
+    {
+      "salon": "58 NVC NA",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Tỉnh miền Trung",
+      "online": "online"
+    },
+    {
+      "salon": "68 LN NA",
+      "supervisor": "Nguyễn Thị Phương Anh",
+      "cluster": "Tỉnh miền Trung",
+      "online": "online"
+    },
+    {
+      "salon": "1146 KVC",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "Quận Thủ Đức - Quận 9",
+      "online": "offline"
+    },
+    {
+      "salon": "25 TD",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "Quận 4, 7, 8",
+      "online": "offline"
+    },
+    {
+      "salon": "255 NAN",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "TP Thủ Dầu, Tỉnh Bình Dương",
+      "online": "offline"
+    },
+    {
+      "salon": "29 HB",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "Quận Thủ Đức - Quận 9",
+      "online": "offline"
+    },
+    {
+      "salon": "341 XVNT",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "Q1, Bình Thạnh, Phú Nhuận",
+      "online": "offline"
+    },
+    {
+      "salon": "36 N1 BD",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "TP Thủ Dầu, Tỉnh Bình Dương",
+      "online": "offline"
+    },
+    {
+      "salon": "401/1 NDT",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "TP Thủ Đức, Quận 2",
+      "online": "offline"
+    },
+    {
+      "salon": "420 HTP",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "Quận 4, 7, 8",
+      "online": "offline"
+    },
+    {
+      "salon": "80 PL BD",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "TP Thủ Dầu, Tỉnh Bình Dương",
+      "online": "offline"
+    },
+    {
+      "salon": "103 TN",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "TP Thủ Đức, Quận 2",
+      "online": "offline"
+    },
+    {
+      "salon": "113 THD AG",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "Quận 12, Củ Chi, Long Xuyên",
+      "online": "online"
+    },
+    {
+      "salon": "1371 PVT",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "TP Biên Hòa, Đồng Nai",
+      "online": "online"
+    },
+    {
+      "salon": "451 PVT",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "TP Biên Hòa, Đồng Nai",
+      "online": "online"
+    },
+    {
+      "salon": "7 DTP LA",
+      "supervisor": "Nguyễn Thị Thanh Tâm",
+      "cluster": "Bà Rịa, Vũng Tàu, Tân An, Tiền Giang",
+      "online": "online"
+    },
+    {
+      "salon": "1180 QT",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận Gò Vấp - Tân Bình - Ninh Kiều",
+      "online": "offline"
+    },
+    {
+      "salon": "12 LDT",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận Gò Vấp - Tân Bình - Ninh Kiều",
+      "online": "offline"
+    },
+    {
+      "salon": "145 THT",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 3 -10 - Tân Bình - Tân Phú",
+      "online": "offline"
+    },
+    {
+      "salon": "190 HB",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 3 -10 - Tân Bình - Tân Phú",
+      "online": "offline"
+    },
+    {
+      "salon": "483 TN",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận Gò Vấp - Tân Bình - Ninh Kiều",
+      "online": "offline"
+    },
+    {
+      "salon": "575 AC",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 3 -10 - Tân Bình - Tân Phú",
+      "online": "offline"
+    },
+    {
+      "salon": "76 PVH",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 12, Củ Chi, Long Xuyên",
+      "online": "offline"
+    },
+    {
+      "salon": "927 HG",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Q10-11-5-6- Bình chánh - Bình Tân",
+      "online": "offline"
+    },
+    {
+      "salon": "99 TSN",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 3 -10 - Tân Bình - Tân Phú",
+      "online": "offline"
+    },
+    {
+      "salon": "32 NAT",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 12, Củ Chi, Long Xuyên",
+      "online": "offline"
+    },
+    {
+      "salon": "730 TL10",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Q10-11-5-6- Bình chánh - Bình Tân",
+      "online": "offline"
+    },
+    {
+      "salon": "312 LVS",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 3 -10 - Tân Bình - Tân Phú",
+      "online": "offline"
+    },
+    {
+      "salon": "186 DTH",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Q1, Bình Thạnh, Phú Nhuận",
+      "online": "online"
+    },
+    {
+      "salon": "236 DBT",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 4, 7, 8",
+      "online": "online"
+    },
+    {
+      "salon": "237 NTT",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 4, 7, 8",
+      "online": "offline"
+    },
+    {
+      "salon": "8 CVL",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Q10-11-5-6- Bình chánh - Bình Tân",
+      "online": "online"
+    },
+    {
+      "salon": "708 LTT",
+      "supervisor": "Ngô Thị Mai Loan",
+      "cluster": "Quận 3 -10 - Tân Bình - Tân Phú",
+      "online": "online"
+    },
+    {
+      "salon": "10 TP",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "11 PKT",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Khu vực Hà Đông",
+      "online": "offline"
+    },
+    {
+      "salon": "148 TD",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Nam Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "168 NVC",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "173 TN",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Nam Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "186 QT",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Khu vực Hà Đông",
+      "online": "offline"
+    },
+    {
+      "salon": "202 DC",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Nam Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "382 NT",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "39 HBT",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Nam Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "50BT4 NPC LD",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Nam Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "62 LH",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "65 CD",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Phía Đông Hà Nội",
+      "online": "offline"
+    },
+    {
+      "salon": "290 QT TH",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Tỉnh miền Trung",
+      "online": "online"
+    },
+    {
+      "salon": "304 NT TH",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Tỉnh miền Trung",
+      "online": "online"
+    },
+    {
+      "salon": "80 TP TH",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Tỉnh miền Trung",
+      "online": "online"
+    },
+    {
+      "salon": "595 BT TH",
+      "supervisor": "Phạm Thị Nga",
+      "cluster": "Tỉnh miền Trung",
+      "online": "online"
+    }
+  ]
+}

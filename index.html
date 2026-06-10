@@ -113,14 +113,15 @@
   </div>
 
   <div id="viewSalon" style="display:none">
+    <div id="salonKpi" style="margin-bottom:14px"></div>
     <table id="tblSalon">
       <thead>
         <tr>
           <th>Salon</th>
-          <th>Số lần đi</th>
           <th>Salesup phụ trách</th>
-          <th>Skinner chấm</th>
-          <th>Skinner đào tạo</th>
+          <th>Cụm</th>
+          <th>Số lần đi (mục tiêu ≥3)</th>
+          <th>Đào tạo</th>
           <th>Tiến độ TB</th>
           <th>Ảnh</th>
           <th>Chi tiết</th>
@@ -143,15 +144,23 @@
 let DATA = null, CHECK = [], VIEW = [];
 let sortKey = 'date', sortDir = 1;
 let TAB = 'visits';
+let ASSIGN = [], TARGET = 3;
+const ASSIGN_MAP = new Map();
+function skey(s){ return (s||'').trim().toUpperCase().replace(/\s+/g,' '); }
 
 function pctColor(p){ return p>=0.85?'var(--green)':p>=0.5?'var(--amber)':'var(--red)'; }
 
 function load(){
-  fetch('data.json?_=' + Date.now())
-    .then(r=>r.json())
-    .then(d=>{ DATA=d; CHECK=d.checklist_items||[]; init(); })
-    .catch(e=>{ document.getElementById('rows').innerHTML =
-      '<tr><td colspan="6" class="empty">Không đọc được data.json — chạy đồng bộ trước.</td></tr>'; });
+  Promise.all([
+    fetch('data.json?_=' + Date.now()).then(r=>r.json()),
+    fetch('assignments.json?_=' + Date.now()).then(r=>r.json()).catch(()=>({target_visits:3,assignments:[]}))
+  ]).then(([d,a])=>{
+    DATA=d; CHECK=d.checklist_items||[];
+    ASSIGN=a.assignments||[]; TARGET=a.target_visits||3;
+    ASSIGN.forEach(x=>ASSIGN_MAP.set(skey(x.salon),x));
+    init();
+  }).catch(e=>{ document.getElementById('rows').innerHTML =
+    '<tr><td colspan="6" class="empty">Không đọc được data.json — chạy đồng bộ trước.</td></tr>'; });
 }
 
 function init(){
@@ -162,7 +171,8 @@ function init(){
       '<div class="src-warn">⚠️ Đây là dữ liệu MẪU từ CSV, ảnh chưa hiển thị. Sau khi nối Lark API và chạy đồng bộ, ảnh thật sẽ tự xuất hiện.</div>';
   }
   // fill filters
-  fillSelect('fSalesup', uniq('salesup'));
+  const sups=[...new Set([...(DATA.visits||[]).map(v=>v.salesup), ...ASSIGN.map(a=>a.supervisor)].filter(Boolean))].sort();
+  fillSelect('fSalesup', sups);
   fillSelect('fSalon', uniq('salon'));
   fillSelect('fDate', uniq('date'));
   ['fSalesup','fSalon','fDate'].forEach(id=>document.getElementById(id).onchange=render);
@@ -236,54 +246,72 @@ function renderVisits(){
 function sumNumbers(s){ const m=(s||'').match(/\d+/g); return m?m.reduce((a,b)=>a+(+b),0):0; }
 
 function renderSalon(){
-  const map=new Map();
-  VIEW.forEach(v=>{ const k=v.salon||'—'; if(!map.has(k)) map.set(k,[]); map.get(k).push(v); });
-  const arr=[...map.entries()].map(([salon,vs])=>({
-    salon, vs,
-    count: vs.length,
-    sups: [...new Set(vs.map(v=>v.salesup).filter(Boolean))],
-    checked: vs.reduce((s,v)=>s+sumNumbers(v.skinner_checked),0),
-    trained: vs.reduce((s,v)=>s+sumNumbers(v.skinner_trained),0),
-    avg: vs.reduce((s,v)=>s+v.completion,0)/vs.length,
-    photos: vs.reduce((s,v)=>s+photosCount(v),0),
-  })).sort((a,b)=> b.count-a.count || b.avg-a.avg || a.salon.localeCompare(b.salon));
-  const rows=document.getElementById('salonRows');
-  rows.innerHTML='';
-  arr.forEach(s=>{
+  const fs=val('fSalesup'), fl=val('fSalon');
+  // nhóm các lượt đi (đã lọc) theo salon
+  const byS=new Map();
+  VIEW.forEach(v=>{ const k=skey(v.salon); if(!byS.has(k)) byS.set(k,[]); byS.get(k).push(v); });
+  // danh sách salon = theo phân cụm (nhiệm vụ); fallback theo salon đã đi nếu chưa có phân cụm
+  let base = ASSIGN.length ? ASSIGN.slice()
+    : [...byS.keys()].map(k=>({salon:byS.get(k)[0].salon,supervisor:'',cluster:'',online:''}));
+  base = base.filter(a => (!fs||a.supervisor===fs) && (!fl||a.salon===fl));
+  const rows = base.map(a=>{
+    const vs = byS.get(skey(a.salon)) || [];
+    return {
+      a, vs,
+      count: vs.length,
+      trained: vs.reduce((s,v)=>s+sumNumbers(v.skinner_trained),0),
+      avg: vs.length ? vs.reduce((s,v)=>s+v.completion,0)/vs.length : 0,
+      photos: vs.reduce((s,v)=>s+photosCount(v),0),
+      done: vs.length >= TARGET,
+    };
+  }).sort((x,y)=> x.count-y.count || x.a.salon.localeCompare(y.a.salon)); // chưa đạt lên đầu
+  // KPI tổng
+  const achieved=rows.filter(r=>r.done).length;
+  const zero=rows.filter(r=>r.count===0).length;
+  document.getElementById('salonKpi').innerHTML=
+    `<span class="pill" style="background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);color:var(--green)">✅ Đạt mục tiêu ≥${TARGET} lần: ${achieved}/${rows.length} salon</span>
+     <span class="pill" style="margin-left:8px;color:var(--amber)">⏳ Đang dở: ${rows.length-achieved-zero}</span>
+     <span class="pill" style="margin-left:8px;color:var(--red)">❌ Chưa đi: ${zero}</span>`;
+  const tb=document.getElementById('salonRows'); tb.innerHTML='';
+  rows.forEach(r=>{
+    const p=Math.min(r.count/TARGET,1);
+    const col=r.done?'var(--green)':r.count>0?'var(--amber)':'var(--red)';
     const tr=document.createElement('tr'); tr.className='row';
     tr.innerHTML=`
-      <td><b>${esc(s.salon)}</b></td>
-      <td><span class="pill">${s.count} lần</span></td>
-      <td>${s.sups.map(esc).join(', ')||'—'}</td>
-      <td>${s.checked||'—'}</td>
-      <td>${s.trained||'—'}</td>
+      <td><b>${esc(r.a.salon)}</b>${r.a.online?` <span class="pill" style="font-size:10px">${esc(r.a.online)}</span>`:''}</td>
+      <td>${esc(r.a.supervisor||'—')}</td>
+      <td style="color:var(--muted)">${esc(r.a.cluster||'—')}</td>
       <td><div style="display:flex;align-items:center">
-        <div class="bar"><i style="width:${Math.round(s.avg*100)}%;background:${pctColor(s.avg)}"></i></div>
-        <span class="pct" style="color:${pctColor(s.avg)}">${Math.round(s.avg*100)}%</span>
+        <div class="bar"><i style="width:${Math.round(p*100)}%;background:${col}"></i></div>
+        <span class="pct" style="color:${col}">${r.count}/${TARGET}</span>
       </div></td>
-      <td>${s.photos} ảnh</td>
+      <td>${r.trained||'—'}</td>
+      <td><span class="pct" style="color:${r.vs.length?pctColor(r.avg):'var(--muted)'}">${r.vs.length?Math.round(r.avg*100)+'%':'—'}</span></td>
+      <td>${r.photos} ảnh</td>
       <td><button class="btn">Xem ›</button></td>`;
-    tr.onclick=()=>openSalonModal(s);
-    rows.appendChild(tr);
+    tr.onclick=()=>openSalonModal(r);
+    tb.appendChild(tr);
   });
-  document.getElementById('emptySalon').style.display=arr.length?'none':'block';
+  document.getElementById('emptySalon').style.display=rows.length?'none':'block';
 }
 
-function openSalonModal(s){
-  const m=document.getElementById('modal');
-  const list=s.vs.slice().sort((a,b)=>(a.date>b.date?1:a.date<b.date?-1:0)).map(v=>`
-    <div class="checkitem" style="cursor:pointer" onclick="openVisitById('${esc(v.id)}')">
-      <div class="head">
-        <span class="name">${esc(v.date||'—')} • ${esc(v.salesup||'')}</span>
-        <span class="badge ${v.completion>=0.85?'ok':'no'}">${Math.round(v.completion*100)}% • ${doneCount(v)}/${CHECK.length}</span>
-      </div>
-      <div class="nophoto">${photosCount(v)} ảnh${v.skinner_trained?' • Đào tạo: '+esc(v.skinner_trained):''}${v.missing_materials?' • ⚠️ thiếu: '+esc(v.missing_materials):''}</div>
-    </div>`).join('');
+function openSalonModal(r){
+  const a=r.a, m=document.getElementById('modal');
+  const list = r.vs.length
+    ? r.vs.slice().sort((x,y)=>(x.date>y.date?1:x.date<y.date?-1:0)).map(v=>`
+      <div class="checkitem" style="cursor:pointer" onclick="openVisitById('${esc(v.id)}')">
+        <div class="head">
+          <span class="name">${esc(v.date||'—')} • ${esc(v.salesup||'')}</span>
+          <span class="badge ${v.completion>=0.85?'ok':'no'}">${Math.round(v.completion*100)}% • ${doneCount(v)}/${CHECK.length}</span>
+        </div>
+        <div class="nophoto">${photosCount(v)} ảnh${v.skinner_trained?' • Đào tạo: '+esc(v.skinner_trained):''}${v.missing_materials?' • ⚠️ thiếu: '+esc(v.missing_materials):''}</div>
+      </div>`).join('')
+    : '<div class="nophoto">Chưa có lần đi nào.</div>';
   m.innerHTML=`
     <span class="close" onclick="closeModal()">×</span>
-    <h2>🏪 ${esc(s.salon)} <span class="pill" style="font-size:13px">${s.count} lần đi</span></h2>
-    <div class="meta">Salesup: ${s.sups.map(esc).join(', ')||'—'} • Tổng skinner chấm: ${s.checked} • Tổng đào tạo: ${s.trained} • Tiến độ TB: ${Math.round(s.avg*100)}% • ${s.photos} ảnh</div>
-    <div style="color:var(--muted);font-size:12px;margin-bottom:8px">Các lần đi (bấm để xem chi tiết nghiệm thu):</div>
+    <h2>🏪 ${esc(a.salon)} <span class="badge ${r.done?'ok':'no'}">${r.count}/${TARGET} lần</span></h2>
+    <div class="meta">Salesup phụ trách: <b>${esc(a.supervisor||'—')}</b> • Cụm: ${esc(a.cluster||'—')}${a.online?' • '+esc(a.online):''} • Tổng đào tạo: ${r.trained} • ${r.photos} ảnh</div>
+    <div style="color:var(--muted);font-size:12px;margin:10px 0 8px">Lịch sử đi (bấm để xem chi tiết nghiệm thu):</div>
     ${list}`;
   document.getElementById('overlay').classList.add('on');
 }
