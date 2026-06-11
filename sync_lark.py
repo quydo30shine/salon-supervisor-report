@@ -20,6 +20,11 @@ import time
 import urllib.request
 import urllib.parse
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")  # tránh lỗi encoding tiếng Việt trên console Windows
+except Exception:
+    pass
+
 # ------- CẤU HÌNH CHECKLIST: key -> (tên cột trong Lark, nhãn hiển thị) -------
 CHECKLIST = [
     ("front",         "Nghiệm thu trưng bày SP: Quầy mặt tiền",       "Trưng bày - Quầy mặt tiền"),
@@ -48,6 +53,8 @@ APP_ID = os.environ.get("LARK_APP_ID", "").strip()
 APP_SECRET = os.environ.get("LARK_APP_SECRET", "").strip()
 APP_TOKEN = os.environ.get("LARK_APP_TOKEN", "").strip()
 TABLE_ID = os.environ.get("LARK_TABLE_ID", "").strip()
+# Chỉ sync nghiệm thu của tháng này. Dạng "YYYY-MM" (vd 2026-06) hoặc "MM" (vd 06 = tháng 6 bất kỳ năm).
+SYNC_MONTH = os.environ.get("SYNC_MONTH", "2026-06").strip()
 
 
 def api(method, path, token=None, body=None, raw=False):
@@ -104,13 +111,15 @@ def download_media(token, file_token, name):
     if os.path.exists(fpath) and os.path.getsize(fpath) > 0:
         return rel  # đã tải trước đó -> bỏ qua
     try:
-        blob = api("GET", f"/open-apis/drive/v1/medias/{file_token}/download",
+        # đính kèm trong Bitable cần tham số extra=bitablePerm để được phép tải
+        extra = urllib.parse.quote(json.dumps({"bitablePerm": {"tableId": TABLE_ID, "rev": 0}}))
+        blob = api("GET", f"/open-apis/drive/v1/medias/{file_token}/download?extra={extra}",
                    token=token, raw=True)
         with open(fpath, "wb") as f:
             f.write(blob)
         return rel
     except Exception as e:
-        print(f"  ! Lỗi tải ảnh {name}: {e}")
+        print(f"  ! Loi tai anh {file_token}: {e}")
         return None
 
 
@@ -152,6 +161,30 @@ def fmt_date(val):
     return field_text(val)
 
 
+def parse_ym(val):
+    """Trả (year, month) từ field ngày; (None, None) nếu không đọc được."""
+    if isinstance(val, (int, float)) and val > 10_000_000_000:
+        t = time.gmtime(val / 1000 + 7 * 3600)
+        return (t.tm_year, t.tm_mon)
+    s = field_text(val)
+    m = re.search(r'(\d{1,2})/(\d{1,2})/(\d{4})', s)  # dd/mm/yyyy
+    if m:
+        return (int(m.group(3)), int(m.group(2)))
+    m = re.search(r'(\d{4})[/-](\d{1,2})', s)         # yyyy/mm hoặc yyyy-mm
+    if m:
+        return (int(m.group(1)), int(m.group(2)))
+    return (None, None)
+
+
+def match_month(y, mo):
+    if mo is None:
+        return False
+    if "-" in SYNC_MONTH:
+        yy, mm = SYNC_MONTH.split("-")
+        return y == int(yy) and mo == int(mm)
+    return mo == int(SYNC_MONTH)
+
+
 def main():
     missing = [k for k, v in {
         "LARK_APP_ID": APP_ID, "LARK_APP_SECRET": APP_SECRET,
@@ -170,11 +203,19 @@ def main():
 
     visits = []
     img_total = 0
+    skipped = 0
+    skipped_dates = []
     for i, rec in enumerate(records):
         f = rec.get("fields", {})
         salon = field_text(f.get(COL_SALON))
         salesup = field_text(f.get(COL_SALESUP))
         if not salon and not salesup:
+            continue
+        # chỉ giữ nghiệm thu của tháng cần sync
+        y, mo = parse_ym(f.get(COL_DATE))
+        if not match_month(y, mo):
+            skipped += 1
+            skipped_dates.append(fmt_date(f.get(COL_DATE)) or "(trống)")
             continue
         items, done = {}, 0
         for key, col, _label in CHECKLIST:
@@ -211,12 +252,16 @@ def main():
     data = {
         "generated_at": time.strftime("%d/%m/%Y %H:%M", time.gmtime(time.time() + 7 * 3600)),
         "source": "lark",
+        "month": SYNC_MONTH,
         "checklist_items": [{"key": k, "label": lbl} for k, _c, lbl in CHECKLIST],
         "visits": visits,
     }
     with open(os.path.join(HERE, "data.json"), "w", encoding="utf-8") as fp:
         json.dump(data, fp, ensure_ascii=False, indent=2)
-    print(f"OK: {len(visits)} luot di salon, {img_total} anh -> data.json")
+    print(f"OK: thang {SYNC_MONTH} | {len(visits)} luot di salon, {img_total} anh | bo qua {skipped} ban ghi ngoai thang")
+    if skipped_dates:
+        uniq = sorted(set(skipped_dates))
+        print("  Ngay bi bo qua (mau):", ", ".join(uniq[:15]))
 
 
 if __name__ == "__main__":
