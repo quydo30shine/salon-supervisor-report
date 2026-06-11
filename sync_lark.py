@@ -54,7 +54,7 @@ APP_SECRET = os.environ.get("LARK_APP_SECRET", "").strip()
 APP_TOKEN = os.environ.get("LARK_APP_TOKEN", "").strip()
 TABLE_ID = os.environ.get("LARK_TABLE_ID", "").strip()
 # Chỉ sync nghiệm thu của tháng này. Dạng "YYYY-MM" (vd 2026-06) hoặc "MM" (vd 06 = tháng 6 bất kỳ năm).
-SYNC_MONTH = os.environ.get("SYNC_MONTH", "2026-06").strip()
+SYNC_MONTH = os.environ.get("SYNC_MONTH", "").strip() or "2026-06"
 
 
 def api(method, path, token=None, body=None, raw=False):
