@@ -77,6 +77,8 @@
   <div class="tabs">
     <div class="tab on" data-tab="visits">📋 Theo lượt đi</div>
     <div class="tab" data-tab="salon">🏪 Theo salon</div>
+    <div class="tab" data-tab="sup">👤 Theo Salesup</div>
+    <div class="tab" data-tab="week">📅 Theo tuần</div>
   </div>
 
   <div class="filters">
@@ -130,6 +132,28 @@
       <tbody id="salonRows"></tbody>
     </table>
     <div class="empty" id="emptySalon" style="display:none">Không có dữ liệu phù hợp bộ lọc.</div>
+  </div>
+
+  <div id="viewSup" style="display:none">
+    <table id="tblSup">
+      <thead>
+        <tr>
+          <th>Salesup</th>
+          <th>Salon phụ trách</th>
+          <th>Đã nghiệm thu</th>
+          <th>Chưa nghiệm thu</th>
+          <th>Tiến độ tháng (lượt / mục tiêu)</th>
+        </tr>
+      </thead>
+      <tbody id="supRows"></tbody>
+    </table>
+    <div class="empty" id="emptySup" style="display:none">Chưa có dữ liệu phân cụm.</div>
+  </div>
+
+  <div id="viewWeek" style="display:none">
+    <div style="color:var(--muted);font-size:12px;margin-bottom:10px">Số lượt nghiệm thu mỗi salesup theo tuần (di chuột vào ô để xem tên salon).</div>
+    <div id="weekWrap"></div>
+    <div class="empty" id="emptyWeek" style="display:none">Không có dữ liệu phù hợp bộ lọc.</div>
   </div>
 </div>
 
@@ -216,9 +240,12 @@ function render(){
     return (x>y?1:x<y?-1:0)*sortDir;
   });
   renderStats();
-  document.getElementById('viewVisits').style.display = TAB==='visits' ? '' : 'none';
-  document.getElementById('viewSalon').style.display  = TAB==='salon'  ? '' : 'none';
-  if(TAB==='salon') renderSalon(); else renderVisits();
+  const tabs={visits:'viewVisits', salon:'viewSalon', sup:'viewSup', week:'viewWeek'};
+  Object.entries(tabs).forEach(([t,id])=>document.getElementById(id).style.display = TAB===t ? '' : 'none');
+  if(TAB==='salon') renderSalon();
+  else if(TAB==='sup') renderSup();
+  else if(TAB==='week') renderWeek();
+  else renderVisits();
 }
 
 function renderVisits(){
@@ -332,6 +359,79 @@ function openSalonModal(r){
   document.getElementById('overlay').classList.add('on');
 }
 function openVisitById(id){ const v=(DATA.visits||[]).find(x=>x.id===id); if(v) openModal(v); }
+
+// ---------- Tab: Theo Salesup ----------
+function renderSup(){
+  const fs=val('fSalesup');
+  const cnt=new Map();                                  // salon -> số lượt (từ dữ liệu đã lọc)
+  VIEW.forEach(v=>{ const k=skey(v.salon); cnt.set(k,(cnt.get(k)||0)+1); });
+  const sup=new Map();
+  ASSIGN.filter(a=>a.has_sup && (!fs||a.supervisor===fs)).forEach(a=>{
+    if(!sup.has(a.supervisor)) sup.set(a.supervisor,{salons:0,visited:0,target:0,done:0});
+    const o=sup.get(a.supervisor), c=cnt.get(skey(a.salon))||0, t=a.target||0;
+    o.salons++; o.target+=t; o.done+=Math.min(c,t); if(c>0) o.visited++;
+  });
+  const arr=[...sup.entries()].map(([name,o])=>({name,...o,notVisited:o.salons-o.visited}))
+    .sort((a,b)=> (a.target?a.done/a.target:0)-(b.target?b.done/b.target:0) || a.name.localeCompare(b.name));
+  const tb=document.getElementById('supRows'); tb.innerHTML='';
+  arr.forEach(s=>{
+    const p=s.target? s.done/s.target : 0;
+    const col=pctColor(p);
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><b>${esc(s.name)}</b></td>
+      <td>${s.salons}</td>
+      <td style="color:var(--green)">${s.visited}</td>
+      <td style="color:${s.notVisited?'var(--red)':'var(--muted)'}">${s.notVisited}</td>
+      <td><div style="display:flex;align-items:center">
+        <div class="bar"><i style="width:${Math.round(p*100)}%;background:${col}"></i></div>
+        <span class="pct" style="color:${col}">${s.done}/${s.target} lượt</span>
+        <span class="pill" style="margin-left:8px">${Math.round(p*100)}%</span>
+      </div></td>`;
+    tb.appendChild(tr);
+  });
+  document.getElementById('emptySup').style.display=arr.length?'none':'block';
+}
+
+// ---------- Tab: Theo tuần ----------
+function parseDate(s){ const m=(s||'').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/); return m? new Date(+m[3],+m[2]-1,+m[1]) : null; }
+function mondayOf(d){ const x=new Date(d); const off=(x.getDay()+6)%7; x.setDate(x.getDate()-off); x.setHours(0,0,0,0); return x; }
+function fmtDM(d){ return ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2); }
+
+function renderWeek(){
+  const fs=val('fSalesup');
+  const allSups=[...new Set([...ASSIGN.filter(a=>a.has_sup).map(a=>a.supervisor), ...VIEW.map(v=>v.salesup)].filter(Boolean))].sort();
+  const cols=fs? allSups.filter(s=>s===fs) : allSups;
+  const weeks=new Map();
+  VIEW.forEach(v=>{
+    const d=parseDate(v.date); if(!d) return;
+    const mon=mondayOf(d), key=mon.getTime();
+    if(!weeks.has(key)) weeks.set(key,{mon, perSup:new Map(), salonsBySup:new Map()});
+    const w=weeks.get(key);
+    w.perSup.set(v.salesup,(w.perSup.get(v.salesup)||0)+1);
+    const a=w.salonsBySup.get(v.salesup)||[]; a.push(v.salon); w.salonsBySup.set(v.salesup,a);
+  });
+  const wk=[...weeks.values()].sort((a,b)=>a.mon-b.mon);
+  const wrap=document.getElementById('weekWrap');
+  if(!wk.length){ wrap.innerHTML=''; document.getElementById('emptyWeek').style.display='block'; return; }
+  document.getElementById('emptyWeek').style.display='none';
+  const colTot={}; cols.forEach(c=>colTot[c]=0);
+  let head=`<tr><th>Tuần</th>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}<th>Tổng</th></tr>`;
+  let body='';
+  wk.forEach((w,i)=>{
+    const sun=new Date(w.mon); sun.setDate(sun.getDate()+6);
+    let rowTot=0;
+    const cells=cols.map(c=>{
+      const n=w.perSup.get(c)||0; rowTot+=n; colTot[c]+=n;
+      const salons=(w.salonsBySup.get(c)||[]).join(', ');
+      return `<td style="text-align:center"${salons?` title="${esc(salons)}"`:''}>${n? '<b>'+n+'</b>' : '<span style="color:var(--line)">–</span>'}</td>`;
+    }).join('');
+    body+=`<tr><td><b>Tuần ${i+1}</b> <span style="color:var(--muted);font-size:12px">${fmtDM(w.mon)}–${fmtDM(sun)}</span></td>${cells}<td style="text-align:center"><b>${rowTot}</b></td></tr>`;
+  });
+  const grand=Object.values(colTot).reduce((a,b)=>a+b,0);
+  let foot=`<tr style="background:var(--card2)"><td><b>Tổng tháng</b></td>${cols.map(c=>`<td style="text-align:center"><b>${colTot[c]}</b></td>`).join('')}<td style="text-align:center"><b>${grand}</b></td></tr>`;
+  wrap.innerHTML=`<table><thead>${head}</thead><tbody>${body}${foot}</tbody></table>`;
+}
 
 function renderStats(){
   const all=DATA.visits||[];
