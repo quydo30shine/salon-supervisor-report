@@ -430,7 +430,37 @@ function renderWeek(){
   });
   const grand=Object.values(colTot).reduce((a,b)=>a+b,0);
   let foot=`<tr style="background:var(--card2)"><td><b>Tổng tháng</b></td>${cols.map(c=>`<td style="text-align:center"><b>${colTot[c]}</b></td>`).join('')}<td style="text-align:center"><b>${grand}</b></td></tr>`;
-  wrap.innerHTML=`<table><thead>${head}</thead><tbody>${body}${foot}</tbody></table>`;
+  const tableHtml=`<table><thead>${head}</thead><tbody>${body}${foot}</tbody></table>`;
+
+  // Chi tiết: mỗi tuần liệt kê salon đã nghiệm thu kèm tiến độ luỹ kế / mục tiêu
+  const cum=new Map();
+  let detail='<div style="margin-top:20px;font-weight:600">Tiến độ nghiệm thu từng salon theo tuần <span style="color:var(--muted);font-weight:400;font-size:12px">(luỹ kế đến hết tuần / mục tiêu)</span></div>';
+  wk.forEach((w,i)=>{
+    const sun=new Date(w.mon); sun.setDate(sun.getDate()+6);
+    let bySup='';
+    cols.forEach(c=>{
+      const names=w.salonsBySup.get(c)||[];
+      if(!names.length) return;
+      const per=new Map();
+      names.forEach(sn=>{ const k=skey(sn); if(!per.has(k)) per.set(k,{name:sn,n:0}); per.get(k).n++; });
+      let chips='';
+      [...per.values()].forEach(o=>{
+        const k=skey(o.name);
+        const cur=(cum.get(k)||0)+o.n; cum.set(k,cur);
+        const asg=ASSIGN_MAP.get(k), t=asg?asg.target:0;
+        let label,col;
+        if(t>0){ col = cur>=t?'var(--green)':'var(--amber)'; label=`${cur}/${t}`; }
+        else { col='var(--muted)'; label=`${cur} lượt`; }
+        const wkn = o.n>1 ? ` <span style="opacity:.7">(+${o.n})</span>` : '';
+        chips+=`<span class="pill" style="margin:2px 4px 2px 0;border-color:${col};color:${col}">${esc(o.name)} ${label}${wkn}</span>`;
+      });
+      bySup+=`<div style="margin:6px 0"><span style="color:var(--muted);font-size:12px">${esc(c)}:</span> ${chips}</div>`;
+    });
+    detail+=`<div class="checkitem" style="cursor:default">
+      <div class="head"><span class="name">Tuần ${i+1} <span style="color:var(--muted);font-weight:400;font-size:12px">${fmtDM(w.mon)}–${fmtDM(sun)}</span></span></div>
+      ${bySup||'<div class="nophoto">Không có lượt nghiệm thu.</div>'}</div>`;
+  });
+  wrap.innerHTML = tableHtml + detail;
 }
 
 function renderStats(){
