@@ -13,7 +13,7 @@ data.json + images/  ──commit──> repo  ──GitHub Pages──> link b�
 
 - `index.html` — báo cáo (web tĩnh, không cần server).
 - `sync_lark.py` — gọi Lark API, ghi `data.json` và tải ảnh vào `images/`.
-- `.github/workflows/sync.yml` — chạy `sync_lark.py` mỗi ngày 08:00 (giờ VN) hoặc bấm tay.
+- `.github/workflows/sync.yml` — chạy `sync_lark.py` mỗi ngày 09:00 (giờ VN) hoặc bấm tay.
 - `data.json` — dữ liệu báo cáo (hiện đang là MẪU từ CSV; sẽ bị ghi đè khi sync Lark).
 - `build_sample_from_csv.py` — chỉ để tạo data MẪU từ file CSV (không cần sau khi nối Lark).
 
@@ -58,7 +58,7 @@ Repo → tab **Actions** → workflow *"Sync Lark -> Báo cáo"* → **Run workf
 Sau khi chạy xong, `data.json` và `images/` được cập nhật, mở link Pages để xem.
 
 ## Cập nhật hàng ngày
-Tự động chạy lúc 08:00 VN mỗi ngày. Muốn cập nhật ngay: vào **Actions → Run workflow**.
+Tự động chạy lúc 09:00 VN mỗi ngày. Muốn cập nhật ngay: vào **Actions → Run workflow**.
 
 ## Chạy thử ở máy (tùy chọn)
 ```bash
