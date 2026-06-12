@@ -3,7 +3,7 @@ name: Sync Lark -> Báo cáo
 on:
   workflow_dispatch:        # cho phép bấm chạy tay trong tab Actions
   schedule:
-    - cron: '0 1 * * *'     # 01:00 UTC = 08:00 giờ VN mỗi ngày
+    - cron: '0 2 * * *'     # 02:00 UTC = 09:00 giờ VN mỗi ngày
 
 permissions:
   contents: write           # cho phép commit data.json + ảnh
