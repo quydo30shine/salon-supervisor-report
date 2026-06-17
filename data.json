@@ -1,5 +1,5 @@
 {
-  "generated_at": "16/06/2026 14:25",
+  "generated_at": "17/06/2026 14:08",
   "source": "lark",
   "month": "2026-06",
   "checklist_items": [
@@ -49,7 +49,7 @@
       "salon": "55A NVL",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "1 sup 3 stylist",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -234,7 +234,7 @@
       "salon": "39 HBT",
       "missing_materials": "",
       "skinner_checked": "1 stylist",
-      "skinner_trained": "1 stylist",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -328,7 +328,7 @@
       "salon": "109 TQH",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "1 SM",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -414,7 +414,7 @@
       "salon": "11 PKT",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "2 skinner 1 sup",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -505,7 +505,7 @@
       "salon": "382 NT",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "1 skinner, 1 stylist",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -596,7 +596,7 @@
       "salon": "927 HG",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "sup Minh bán combo kính, skn Nhi Đa",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -678,7 +678,7 @@
       "salon": "730 TL10",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "sup Hà, Skn Ngân",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -759,7 +759,7 @@
       "salon": "575 AC",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "sup Mơ, skn Vi stl Bình",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1005,7 +1005,7 @@
       "salon": "99 TSN",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "1stl 2skn",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1088,7 +1088,7 @@
       "salon": "312 LVS",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "sup tư vấn gói trải nghiệm",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1169,7 +1169,7 @@
       "salon": "8 CVL",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "1 sup Thư, skn Trang, Stl Long",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1251,7 +1251,7 @@
       "salon": "190 HB",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "1 sup 1skn Vy",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1333,7 +1333,7 @@
       "salon": "1180 QT",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "skn Nhi bán sp kèm combo, sup Dương",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1415,7 +1415,7 @@
       "salon": "575 AC",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "1 skn 1 sup 1 stl",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1498,7 +1498,7 @@
       "salon": "237 NTT",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "2 sup",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1579,7 +1579,7 @@
       "submitted_on": "1781485787000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "103 TN",
-      "missing_materials": "tinh dầu",
+      "missing_materials": "",
       "skinner_checked": "",
       "skinner_trained": "",
       "items": {
@@ -1665,7 +1665,7 @@
       "salon": "173 TN",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "2 Stylist",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1754,7 +1754,7 @@
       "salon": "50BT4 NPC LD",
       "missing_materials": "",
       "skinner_checked": "1 sup",
-      "skinner_trained": "4 stylist",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1850,7 +1850,7 @@
       "salon": "168 NVC",
       "missing_materials": "",
       "skinner_checked": "2 sup",
-      "skinner_trained": "2 sup",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -1941,7 +1941,7 @@
       "salon": "39 HBT",
       "missing_materials": "",
       "skinner_checked": "1 sup vs 1 stylist",
-      "skinner_trained": "1 sup vs 1 stylist",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -2037,7 +2037,7 @@
       "salon": "148 TD",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "2 stylist",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -2129,7 +2129,7 @@
       "salon": "65 CD",
       "missing_materials": "",
       "skinner_checked": "1 sup 3 skinner",
-      "skinner_trained": "4",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -2218,7 +2218,7 @@
       "salon": "62 LH",
       "missing_materials": "",
       "skinner_checked": "1 sup",
-      "skinner_trained": "1 sup",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
@@ -2308,7 +2308,7 @@
       "salon": "55A NVL",
       "missing_materials": "",
       "skinner_checked": "",
-      "skinner_trained": "0",
+      "skinner_trained": "",
       "items": {
         "front": {
           "done": true,
