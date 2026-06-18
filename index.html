@@ -283,6 +283,12 @@ function trainedCount(s){ s=(s||'').trim(); if(!s) return 0;
 function fmtTrained(s){ s=(s||'').trim(); if(!s) return '—';
   const n=trainedCount(s);
   return n ? `<b>${n}</b> <span style="color:var(--muted)">(${esc(s)})</span>` : esc(s); }
+function fmtTrainedSalon(vs, total){   // Theo salon: Tổng + từng lượt "ngày: số (text gốc)"
+  const lines = vs.filter(v=>(v.skinner_trained||'').trim())
+    .sort((a,b)=>(parseDate(a.date)?.getTime()||0)-(parseDate(b.date)?.getTime()||0))
+    .map(v=>`<div style="white-space:nowrap;font-size:13px">${esc(v.date||'?')}: ${fmtTrained(v.skinner_trained)}</div>`);
+  if(!lines.length) return '—';
+  return `<div style="font-weight:600;margin-bottom:2px">Tổng: ${total}</div>${lines.join('')}`; }
 
 function renderSalon(){
   const fs=val('fSalesup'), fl=val('fSalon');
@@ -338,7 +344,7 @@ function renderSalon(){
       <td>${supHtml}</td>
       <td style="color:var(--muted)">${esc(r.a.cluster||'—')}</td>
       <td>${cell}</td>
-      <td>${r.trained||'—'}</td>
+      <td>${fmtTrainedSalon(r.vs, r.trained)}</td>
       <td><span class="pct" style="color:${r.vs.length?pctColor(r.avg):'var(--muted)'}">${r.vs.length?Math.round(r.avg*100)+'%':'—'}</span></td>
       <td>${r.photos} ảnh</td>
       <td><button class="btn">Xem ›</button></td>`;
