@@ -124,10 +124,9 @@
         <tr>
           <th>Salon</th>
           <th>Salesup phụ trách</th>
-          <th>Cụm</th>
           <th>Nghiệm thu / Mục tiêu</th>
           <th>Đào tạo</th>
-          <th>Tiến độ TB</th>
+          <th>Vấn đề Menu, Vật tư</th>
           <th>Ảnh</th>
           <th>Chi tiết</th>
         </tr>
@@ -146,6 +145,8 @@
           <th>Đã nghiệm thu</th>
           <th>Chưa nghiệm thu</th>
           <th>Tiến độ tháng (lượt / mục tiêu)</th>
+          <th>Mục tiêu đào tạo</th>
+          <th>Tiến độ đào tạo</th>
         </tr>
       </thead>
       <tbody id="supRows"></tbody>
@@ -173,6 +174,15 @@ let sortKey = 'date', sortDir = 1;
 let TAB = 'visits';
 let ASSIGN = [], TOFF = 3, TON = 1;
 const ASSIGN_MAP = new Map();
+
+// === MỤC TIÊU ĐÀO TẠO THÁNG — sửa tay mỗi tháng ===
+// key = tên Salesup (đúng như cột Salesup), value = số nhân sự cần đào tạo trong tháng. 0 = chưa đặt.
+const TRAINING_GOALS = {
+  "Nguyễn Thị Phương Anh": 0,
+  "Nguyễn Thị Thanh Tâm": 0,
+  "Ngô Thị Mai Loan": 0,
+  "Phạm Thị Nga": 0,
+};
 function skey(s){ return (s||'').trim().toUpperCase().replace(/\s+/g,' '); }
 
 function pctColor(p){ return p>=0.85?'var(--green)':p>=0.5?'var(--amber)':'var(--red)'; }
@@ -289,6 +299,13 @@ function fmtTrainedSalon(vs, total){   // Theo salon: Tổng + từng lượt "n
     .map(v=>`<div style="white-space:nowrap;font-size:13px">${esc(v.date||'?')}: ${fmtTrained(v.skinner_trained)}</div>`);
   if(!lines.length) return '—';
   return `<div style="font-weight:600;margin-bottom:2px">Tổng: ${total}</div>${lines.join('')}`; }
+function fmtIssues(vs){   // gộp "thiếu vật tư" + "vấn đề Menu/Ấn phẩm" của các lượt vào 1 cột
+  const out=[];
+  vs.forEach(v=>{
+    if((v.missing_materials||'').trim()) out.push(`<div style="font-size:13px"><span style="color:var(--amber)">⚠️ Vật tư:</span> ${esc(v.missing_materials)}</div>`);
+    if((v.menu_issue||'').trim())        out.push(`<div style="font-size:13px"><span style="color:var(--accent)">📋 Menu:</span> ${esc(v.menu_issue)}</div>`);
+  });
+  return out.length ? out.join('') : '<span style="color:var(--muted)">—</span>'; }
 
 function renderSalon(){
   const fs=val('fSalesup'), fl=val('fSalon');
@@ -307,7 +324,6 @@ function renderSalon(){
       a, vs, tgt,
       count: vs.length,
       trained: vs.reduce((s,v)=>s+trainedCount(v.skinner_trained),0),
-      avg: vs.length ? vs.reduce((s,v)=>s+v.completion,0)/vs.length : 0,
       photos: vs.reduce((s,v)=>s+photosCount(v),0),
       done: tgt>0 && vs.length>=tgt,
     };
@@ -342,10 +358,9 @@ function renderSalon(){
     tr.innerHTML=`
       <td><b>${esc(r.a.salon)}</b>${tag?` <span class="pill" style="font-size:10px">${tag}</span>`:''}</td>
       <td>${supHtml}</td>
-      <td style="color:var(--muted)">${esc(r.a.cluster||'—')}</td>
       <td>${cell}</td>
       <td>${fmtTrainedSalon(r.vs, r.trained)}</td>
-      <td><span class="pct" style="color:${r.vs.length?pctColor(r.avg):'var(--muted)'}">${r.vs.length?Math.round(r.avg*100)+'%':'—'}</span></td>
+      <td>${fmtIssues(r.vs)}</td>
       <td>${r.photos} ảnh</td>
       <td><button class="btn">Xem ›</button></td>`;
     tr.onclick=()=>openSalonModal(r);
@@ -382,7 +397,9 @@ function openVisitById(id){ const v=(DATA.visits||[]).find(x=>x.id===id); if(v) 
 function renderSup(){
   const fs=val('fSalesup');
   const cnt=new Map();                                  // salon -> số lượt (từ dữ liệu đã lọc)
-  VIEW.forEach(v=>{ const k=skey(v.salon); cnt.set(k,(cnt.get(k)||0)+1); });
+  const trainedBySup=new Map();                         // salesup -> tổng nhân sự đào tạo
+  VIEW.forEach(v=>{ const k=skey(v.salon); cnt.set(k,(cnt.get(k)||0)+1);
+    if(v.salesup) trainedBySup.set(v.salesup,(trainedBySup.get(v.salesup)||0)+trainedCount(v.skinner_trained)); });
   const sup=new Map();
   ASSIGN.filter(a=>a.has_sup && (!fs||a.supervisor===fs)).forEach(a=>{
     if(!sup.has(a.supervisor)) sup.set(a.supervisor,{salons:0,visited:0,target:0,done:0});
@@ -405,7 +422,11 @@ function renderSup(){
         <div class="bar"><i style="width:${Math.round(p*100)}%;background:${col}"></i></div>
         <span class="pct" style="color:${col}">${s.done}/${s.target} lượt</span>
         <span class="pill" style="margin-left:8px">${Math.round(p*100)}%</span>
-      </div></td>`;
+      </div></td>
+      <td>${(g=>g?g:'<span style="color:var(--muted)">—</span>')(TRAINING_GOALS[s.name]||0)}</td>
+      <td>${(()=>{const tt=trainedBySup.get(s.name)||0, g=TRAINING_GOALS[s.name]||0;
+        const c=g? (tt>=g?'var(--green)':'var(--amber)') : 'var(--txt)';
+        return `<b style="color:${c}">${tt}</b>`;})()}</td>`;
     tb.appendChild(tr);
   });
   document.getElementById('emptySup').style.display=arr.length?'none':'block';
@@ -433,21 +454,21 @@ function renderWeek(){
   const wrap=document.getElementById('weekWrap');
   if(!wk.length){ wrap.innerHTML=''; document.getElementById('emptyWeek').style.display='block'; return; }
   document.getElementById('emptyWeek').style.display='none';
-  const colTot={}; cols.forEach(c=>colTot[c]=0);
-  let head=`<tr><th>Tuần</th>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}<th>Tổng</th></tr>`;
+  const weekTot=wk.map(()=>0);
+  let head=`<tr><th>Salesup</th>${wk.map((w,i)=>{const sun=new Date(w.mon);sun.setDate(sun.getDate()+6);
+    return `<th style="text-align:center">Tuần ${i+1}<br><span style="color:var(--muted);font-weight:400;font-size:11px">${fmtDM(w.mon)}–${fmtDM(sun)}</span></th>`;}).join('')}<th>Tổng</th></tr>`;
   let body='';
-  wk.forEach((w,i)=>{
-    const sun=new Date(w.mon); sun.setDate(sun.getDate()+6);
+  cols.forEach(c=>{
     let rowTot=0;
-    const cells=cols.map(c=>{
-      const n=w.perSup.get(c)||0; rowTot+=n; colTot[c]+=n;
+    const cells=wk.map((w,i)=>{
+      const n=w.perSup.get(c)||0; rowTot+=n; weekTot[i]+=n;
       const salons=(w.salonsBySup.get(c)||[]).join(', ');
       return `<td style="text-align:center"${salons?` title="${esc(salons)}"`:''}>${n? '<b>'+n+'</b>' : '<span style="color:var(--line)">–</span>'}</td>`;
     }).join('');
-    body+=`<tr><td><b>Tuần ${i+1}</b> <span style="color:var(--muted);font-size:12px">${fmtDM(w.mon)}–${fmtDM(sun)}</span></td>${cells}<td style="text-align:center"><b>${rowTot}</b></td></tr>`;
+    body+=`<tr><td><b>${esc(c)}</b></td>${cells}<td style="text-align:center"><b>${rowTot}</b></td></tr>`;
   });
-  const grand=Object.values(colTot).reduce((a,b)=>a+b,0);
-  let foot=`<tr style="background:var(--card2)"><td><b>Tổng tháng</b></td>${cols.map(c=>`<td style="text-align:center"><b>${colTot[c]}</b></td>`).join('')}<td style="text-align:center"><b>${grand}</b></td></tr>`;
+  const grand=weekTot.reduce((a,b)=>a+b,0);
+  let foot=`<tr style="background:var(--card2)"><td><b>Tổng tháng</b></td>${wk.map((w,i)=>`<td style="text-align:center"><b>${weekTot[i]}</b></td>`).join('')}<td style="text-align:center"><b>${grand}</b></td></tr>`;
   const tableHtml=`<table><thead>${head}</thead><tbody>${body}${foot}</tbody></table>`;
 
   // Chi tiết: mỗi tuần liệt kê salon đã nghiệm thu kèm tiến độ luỹ kế / mục tiêu
