@@ -265,7 +265,7 @@ function renderVisits(){
         <span class="pct" style="color:${pctColor(p)}">${Math.round(p*100)}%</span>
         <span class="pill" style="margin-left:8px">${doneCount(v)}/${CHECK.length}</span>
       </div></td>
-      <td>${esc(v.skinner_trained||'—')}</td>
+      <td>${fmtTrained(v.skinner_trained)}</td>
       <td>${esc(v.missing_materials||'—')}</td>
       <td>${esc(v.menu_issue||'—')}</td>
       <td>${photosCount(v)} ảnh</td>
@@ -276,7 +276,13 @@ function renderVisits(){
   document.getElementById('empty').style.display=VIEW.length?'none':'block';
 }
 
-function sumNumbers(s){ const m=(s||'').match(/\d+/g); return m?m.reduce((a,b)=>a+(+b),0):0; }
+function trainedCount(s){ s=(s||'').trim(); if(!s) return 0;
+  const m=s.match(/\d+/g);
+  if(m) return m.reduce((a,b)=>a+(+b),0);              // có số: cộng tổng (vd "1 sup 3 stylist" = 4)
+  return s.split(/[,;\n]|\bvà\b|&/i).map(x=>x.trim()).filter(Boolean).length; } // chỉ tên: đếm mục (vd "sup Dương, Skn Nhi, Phương anh" = 3)
+function fmtTrained(s){ s=(s||'').trim(); if(!s) return '—';
+  const n=trainedCount(s);
+  return n ? `<b>${n}</b> <span style="color:var(--muted)">(${esc(s)})</span>` : esc(s); }
 
 function renderSalon(){
   const fs=val('fSalesup'), fl=val('fSalon');
@@ -294,7 +300,7 @@ function renderSalon(){
     return {
       a, vs, tgt,
       count: vs.length,
-      trained: vs.reduce((s,v)=>s+sumNumbers(v.skinner_trained),0),
+      trained: vs.reduce((s,v)=>s+trainedCount(v.skinner_trained),0),
       avg: vs.length ? vs.reduce((s,v)=>s+v.completion,0)/vs.length : 0,
       photos: vs.reduce((s,v)=>s+photosCount(v),0),
       done: tgt>0 && vs.length>=tgt,
