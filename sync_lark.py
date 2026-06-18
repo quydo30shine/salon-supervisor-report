@@ -41,9 +41,10 @@ COL_DATE     = "Ngày Training"
 COL_SUBMIT   = "Submitted on"
 COL_SALESUP  = "Nhân sự Training"
 COL_SALON    = "Chọn Salon:"
-COL_MISSING  = "Vật tư thiếu"
+COL_MISSING  = "Vật tư, Sản phẩm bán thiếu"
 COL_SK_CHECK = "Số skinner chấm trong ngày"
-COL_SK_TRAIN = "Số skinner đào tạo trong ngày"
+COL_SK_TRAIN = "Số nhân sự đào tạo trong ngày"
+COL_MENU     = "Salon có gặp vấn đề nào về Menu, Ấn phẩm không"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMG_DIR = os.path.join(HERE, "images")
@@ -243,6 +244,7 @@ def main():
             "salesup": salesup,
             "salon": salon,
             "missing_materials": field_text(f.get(COL_MISSING)),
+            "menu_issue": field_text(f.get(COL_MENU)),
             "skinner_checked": field_text(f.get(COL_SK_CHECK)),
             "skinner_trained": field_text(f.get(COL_SK_TRAIN)),
             "items": items,

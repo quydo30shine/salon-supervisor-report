@@ -105,6 +105,9 @@
           <th data-k="salesup">Salesup</th>
           <th data-k="salon">Salon</th>
           <th data-k="completion">Tiến độ checklist</th>
+          <th>Nhân sự đào tạo</th>
+          <th>Thiếu vật tư</th>
+          <th>Menu</th>
           <th data-k="photos">Ảnh</th>
           <th>Chi tiết</th>
         </tr>
@@ -262,6 +265,9 @@ function renderVisits(){
         <span class="pct" style="color:${pctColor(p)}">${Math.round(p*100)}%</span>
         <span class="pill" style="margin-left:8px">${doneCount(v)}/${CHECK.length}</span>
       </div></td>
+      <td>${esc(v.skinner_trained||'—')}</td>
+      <td>${esc(v.missing_materials||'—')}</td>
+      <td>${esc(v.menu_issue||'—')}</td>
       <td>${photosCount(v)} ảnh</td>
       <td><button class="btn">Xem ›</button></td>`;
     tr.onclick=()=>openModal(v);
