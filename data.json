@@ -1,5 +1,5 @@
 {
-  "generated_at": "18/06/2026 17:53",
+  "generated_at": "19/06/2026 14:05",
   "source": "lark",
   "month": "2026-06",
   "checklist_items": [
@@ -50,7 +50,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "1 sup 3 stylist",
       "items": {
         "front": {
           "done": true,
@@ -237,7 +237,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "1 stylist",
-      "skinner_trained": "",
+      "skinner_trained": "1 stylist",
       "items": {
         "front": {
           "done": true,
@@ -332,7 +332,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "1 SM",
       "items": {
         "front": {
           "done": true,
@@ -419,7 +419,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "2 skinner 1 sup",
       "items": {
         "front": {
           "done": true,
@@ -511,7 +511,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "1 skinner, 1 stylist",
       "items": {
         "front": {
           "done": true,
@@ -686,7 +686,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "sup Minh bán combo kính, skn Nhi Đa",
       "items": {
         "front": {
           "done": true,
@@ -769,7 +769,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "sup Hà, Skn Ngân",
       "items": {
         "front": {
           "done": true,
@@ -934,7 +934,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "sup Mơ, skn Vi stl Bình",
       "items": {
         "front": {
           "done": true,
@@ -1183,7 +1183,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "1stl 2skn",
       "items": {
         "front": {
           "done": true,
@@ -1267,7 +1267,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "sup tư vấn gói trải nghiệm",
       "items": {
         "front": {
           "done": true,
@@ -1349,7 +1349,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "1 sup Thư, skn Trang, Stl Long",
       "items": {
         "front": {
           "done": true,
@@ -1432,7 +1432,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "1 sup 1skn Vy",
       "items": {
         "front": {
           "done": true,
@@ -1515,7 +1515,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "skn Nhi bán sp kèm combo, sup Dương",
       "items": {
         "front": {
           "done": true,
@@ -1598,7 +1598,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "1 skn 1 sup 1 stl",
       "items": {
         "front": {
           "done": true,
@@ -1682,7 +1682,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "2 sup",
       "items": {
         "front": {
           "done": true,
@@ -1851,7 +1851,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "",
-      "skinner_trained": "",
+      "skinner_trained": "2 Stylist",
       "items": {
         "front": {
           "done": true,
@@ -1941,7 +1941,7 @@
       "missing_materials": "",
       "menu_issue": "",
       "skinner_checked": "1 sup",
-      "skinner_trained": "",
+      "skinner_trained": "4 stylist",
       "items": {
         "front": {
           "done": true,
