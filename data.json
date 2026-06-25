@@ -1,5 +1,5 @@
 {
-  "generated_at": "25/06/2026 17:31",
+  "generated_at": "25/06/2026 23:24",
   "source": "lark",
   "month": "2026-06",
   "checklist_items": [
@@ -5785,6 +5785,93 @@
           "done": true,
           "images": [
             "images/XoExbwtQeoynOHx0Vj7lEJYsg8f.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27FovwF4G66",
+      "date": "25/06/2026",
+      "submitted_on": "1782396591000",
+      "salesup": "Nguyễn Thị Phương Anh",
+      "salon": "362 NGT BN",
+      "missing_materials": "Cần check lai vật tư detox các gói dvu",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "4 skinner mới\n1 skiner 6T",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/OIRUbqu6CobPN9xVIG9lqv92gCh.jpg",
+            "images/IQfSbe7ekoPPhRxzrH7ltMRcghc.jpg",
+            "images/Xly1bSp1OootYOxfZb4lwVnhghd.jpg",
+            "images/DH8TbQ3VFoBDTOxAIyNlD95ugRf.jpg"
+          ],
+          "count": 4,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/YhQqbA6nho9dLaxF5DUlBLMEgRg.jpg",
+            "images/JN43bO4KOog3iaxkANulNCQ3gUh.jpg"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/WM9sbaNF6o8lSixOZUKlQbTfgNh.jpg"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/DV29bE8eSok9I7x6jTHl1o0mg0f.jpg",
+            "images/XRY6bp8PWozaxRxEbUUldX4egjb.jpg"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/J9Fnb0VZno5o3HxihTJlv2Mag3e.jpg"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/BYjab1nbOoG8RnxAmLXlWJuLgbb.jpg"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/PRZ1bSOs6o4y6QxLbgFldY3Ugxo.jpg"
           ],
           "count": 1,
           "raw": ""
