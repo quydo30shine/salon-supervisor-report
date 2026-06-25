@@ -57,6 +57,15 @@ TABLE_ID = os.environ.get("LARK_TABLE_ID", "").strip()
 # Chỉ sync nghiệm thu của tháng này. Dạng "YYYY-MM" (vd 2026-06) hoặc "MM" (vd 06 = tháng 6 bất kỳ năm).
 SYNC_MONTH = os.environ.get("SYNC_MONTH", "").strip() or "2026-06"
 
+# Quy đổi tên salon đã đổi tên -> tên chuẩn hiện tại, để gộp bản ghi cũ + mới về cùng 1 salon.
+SALON_ALIASES = {
+    "386 NGT BN": "362 NGT BN",
+}
+
+
+def norm_salon(name):
+    return SALON_ALIASES.get(name.strip(), name)
+
 
 def api(method, path, token=None, body=None, raw=False):
     url = f"https://{DOMAIN}{path}"
@@ -208,7 +217,7 @@ def main():
     skipped_dates = []
     for i, rec in enumerate(records):
         f = rec.get("fields", {})
-        salon = field_text(f.get(COL_SALON))
+        salon = norm_salon(field_text(f.get(COL_SALON)))
         salesup = field_text(f.get(COL_SALESUP))
         if not salon and not salesup:
             continue
