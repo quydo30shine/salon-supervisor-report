@@ -104,11 +104,10 @@
           <th data-k="date">Ngày</th>
           <th data-k="salesup">Salesup</th>
           <th data-k="salon">Salon</th>
-          <th data-k="completion">Tiến độ checklist</th>
           <th>Nhân sự đào tạo</th>
           <th>Thiếu vật tư</th>
           <th>Menu</th>
-          <th>Nghiệm thu</th>
+          <th>Nghiệm thu CTKM</th>
           <th data-k="photos">Ảnh</th>
           <th>Chi tiết</th>
         </tr>
@@ -272,16 +271,11 @@ function renderVisits(){
   const rows=document.getElementById('rows');
   rows.innerHTML='';
   VIEW.forEach((v,i)=>{
-    const p=v.completion, tr=document.createElement('tr'); tr.className='row';
+    const tr=document.createElement('tr'); tr.className='row';
     tr.innerHTML=`
       <td>${esc(v.date||'—')}</td>
       <td>${esc(v.salesup||'—')}</td>
       <td><b>${esc(v.salon||'—')}</b></td>
-      <td><div style="display:flex;align-items:center">
-        <div class="bar"><i style="width:${Math.round(p*100)}%;background:${pctColor(p)}"></i></div>
-        <span class="pct" style="color:${pctColor(p)}">${Math.round(p*100)}%</span>
-        <span class="pill" style="margin-left:8px">${doneCount(v)}/${CHECK.length}</span>
-      </div></td>
       <td>${fmtTrained(v.skinner_trained)}</td>
       <td>${esc(v.missing_materials||'—')}</td>
       <td>${esc(v.menu_issue||'—')}</td>
