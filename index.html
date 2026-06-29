@@ -108,6 +108,7 @@
           <th>Nhân sự đào tạo</th>
           <th>Thiếu vật tư</th>
           <th>Menu</th>
+          <th>Nghiệm thu</th>
           <th data-k="photos">Ảnh</th>
           <th>Chi tiết</th>
         </tr>
@@ -127,6 +128,7 @@
           <th>Nghiệm thu / Mục tiêu</th>
           <th>Đào tạo</th>
           <th>Vấn đề Menu, Vật tư</th>
+          <th>Triển khai CTKM</th>
           <th>Ảnh</th>
           <th>Chi tiết</th>
         </tr>
@@ -238,6 +240,11 @@ function fillSelect(id, arr){
 
 function photosCount(v){ return CHECK.reduce((n,c)=>n+((v.items[c.key]||{}).count||0),0); }
 function doneCount(v){ return CHECK.reduce((n,c)=>n+((v.items[c.key]||{}).done?1:0),0); }
+// CTKM "Nghiệm thu / Triển khai CTKM": có ảnh (đính kèm hoặc đã tải) ở hạng mục ctkm
+function ctkmDeployed(v){ const it=(v.items||{}).ctkm||{}; return ((it.count||0)>0)||((it.images||[]).length>0); }
+function deployLabel(ok){ return ok
+  ? '<span style="color:var(--green);font-weight:600">Đã triển khai</span>'
+  : '<span style="color:var(--red)">Chưa triển khai</span>'; }
 
 function render(){
   const fs=val('fSalesup'), fl=val('fSalon'), fd=val('fDate'), q=val('fSearch').toLowerCase().trim();
@@ -278,6 +285,7 @@ function renderVisits(){
       <td>${fmtTrained(v.skinner_trained)}</td>
       <td>${esc(v.missing_materials||'—')}</td>
       <td>${esc(v.menu_issue||'—')}</td>
+      <td>${deployLabel(ctkmDeployed(v))}</td>
       <td>${photosCount(v)} ảnh</td>
       <td><button class="btn">Xem ›</button></td>`;
     tr.onclick=()=>openModal(v);
@@ -361,6 +369,7 @@ function renderSalon(){
       <td>${cell}</td>
       <td>${fmtTrainedSalon(r.vs, r.trained)}</td>
       <td>${fmtIssues(r.vs)}</td>
+      <td>${deployLabel(r.vs.some(ctkmDeployed))}</td>
       <td>${r.photos} ảnh</td>
       <td><button class="btn">Xem ›</button></td>`;
     tr.onclick=()=>openSalonModal(r);
