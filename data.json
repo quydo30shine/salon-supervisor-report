@@ -1,5 +1,5 @@
 {
-  "generated_at": "30/06/2026 13:10",
+  "generated_at": "30/06/2026 17:33",
   "source": "lark",
   "month": "2026-06",
   "checklist_items": [
@@ -7868,6 +7868,179 @@
           "done": true,
           "images": [
             "images/YlLTbkw1MonkbuxmaD5lFeDLgFp.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27Hgjh60YVC",
+      "date": "29/06/2026",
+      "submitted_on": "1782804403000",
+      "salesup": "Phạm Thị Nga",
+      "salon": "595 BT TH",
+      "missing_materials": "đủ",
+      "menu_issue": "không",
+      "skinner_checked": "",
+      "skinner_trained": "0",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/T7G8be2rmoUmG6xbiCMlEX8vgyc.JPEG",
+            "images/Y8nwbQQDDoIx1kx4iADlggxHgue.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/VO8wbc5Ooo4m8KxAdkblBsh9gDc.JPEG",
+            "images/MLfmb88k2o0LwSxiLydl5dZggQI.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/SNJVbTApRoEOT0xCJazlBmQdg7f.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/QOfVbXk4zo5fD9xQZ8rlAo6sgCe.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/WjtibR3J1oYkSuxq8jIlVOp9gnc.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/BJssbBqa5oMtusxbb6Ul6QMCgif.JPEG",
+            "images/TBHebBF7ooPUnxxgjj3lpiD5gBg.JPEG",
+            "images/WzOMbMe2Do2lygx2SvZlWIFKghd.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/Yf7PbUiWwoAm95xUZSAlw2oogAh.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27Hh6g1Jr4V",
+      "date": "29/06/2026",
+      "submitted_on": "1782807185000",
+      "salesup": "Phạm Thị Nga",
+      "salon": "80 TP TH",
+      "missing_materials": "đủ",
+      "menu_issue": "khônv",
+      "skinner_checked": "",
+      "skinner_trained": "0",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/Dl66bksPLoTy2fxp3fUlKarqgih.JPEG",
+            "images/WV6kbr7RroektHxqZIclKQU3gpe.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/QN9ubkooroqotcxzu00lZGPmgXE.JPEG",
+            "images/BZh8bipy5oHTKix8tPjlHtAlgUb.JPEG",
+            "images/ElBmbXRnGoMA3TxHyeElr01Wgvd.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/WWMPbW4eUoiLzGxepw2lK996gOc.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/ChjCbvxiLoLKxnx9E74lOoz5gng.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/MfipbQeO4or6IexMSmRlIcz3gFb.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/DsqtbVxExoYlsExCZcJlhihSgwf.JPEG",
+            "images/JQXXbpebPoCQUBx6Ej6lbXfYgyc.JPEG",
+            "images/Cg0LbcgkMo4U3exKpLKlfKW7gUb.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/VAutbHXIQoeppxx7AWzlD7rUg5X.JPEG"
           ],
           "count": 1,
           "raw": ""
