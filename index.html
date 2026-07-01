@@ -401,15 +401,17 @@ function renderSup(){
   const fs=val('fSalesup');
   const cnt=new Map();                                  // salon -> số lượt (từ dữ liệu đã lọc)
   const trainedBySup=new Map();                         // salesup -> tổng nhân sự đào tạo
+  const visitsBySup=new Map();                          // salesup -> tổng lượt đi salon (không giới hạn theo mục tiêu)
   VIEW.forEach(v=>{ const k=skey(v.salon); cnt.set(k,(cnt.get(k)||0)+1);
-    if(v.salesup) trainedBySup.set(v.salesup,(trainedBySup.get(v.salesup)||0)+trainedCount(v.skinner_trained)); });
+    if(v.salesup){ trainedBySup.set(v.salesup,(trainedBySup.get(v.salesup)||0)+trainedCount(v.skinner_trained));
+      visitsBySup.set(v.salesup,(visitsBySup.get(v.salesup)||0)+1); } });
   const sup=new Map();
   ASSIGN.filter(a=>a.has_sup && (!fs||a.supervisor===fs)).forEach(a=>{
     if(!sup.has(a.supervisor)) sup.set(a.supervisor,{salons:0,visited:0,target:0,done:0});
     const o=sup.get(a.supervisor), c=cnt.get(skey(a.salon))||0, t=a.target||0;
-    o.salons++; o.target+=t; o.done+=Math.min(c,t); if(c>0) o.visited++;
+    o.salons++; o.target+=t; if(c>0) o.visited++;
   });
-  const arr=[...sup.entries()].map(([name,o])=>({name,...o,notVisited:o.salons-o.visited}))
+  const arr=[...sup.entries()].map(([name,o])=>({name,...o,done:visitsBySup.get(name)||0,notVisited:o.salons-o.visited}))
     .sort((a,b)=> (a.target?a.done/a.target:0)-(b.target?b.done/b.target:0) || a.name.localeCompare(b.name));
   const tb=document.getElementById('supRows'); tb.innerHTML='';
   arr.forEach(s=>{
@@ -422,7 +424,7 @@ function renderSup(){
       <td style="color:var(--green)">${s.visited}</td>
       <td style="color:${s.notVisited?'var(--red)':'var(--muted)'}">${s.notVisited}</td>
       <td><div style="display:flex;align-items:center">
-        <div class="bar"><i style="width:${Math.round(p*100)}%;background:${col}"></i></div>
+        <div class="bar"><i style="width:${Math.min(Math.round(p*100),100)}%;background:${col}"></i></div>
         <span class="pct" style="color:${col}">${s.done}/${s.target} lượt</span>
         <span class="pill" style="margin-left:8px">${Math.round(p*100)}%</span>
       </div></td>
