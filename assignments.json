@@ -26,7 +26,7 @@
       "has_sup": true,
       "cluster": "Quận Thủ Đức - Quận 9",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -44,7 +44,7 @@
       "has_sup": true,
       "cluster": "TP Thủ Dầu, Tỉnh Bình Dương",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -53,7 +53,7 @@
       "has_sup": true,
       "cluster": "Q1, Bình Thạnh, Phú Nhuận",
       "type": "offline",
-      "target": 3,
+      "target": 1,
       "phanloai": "Định hình"
     },
     {
@@ -71,7 +71,7 @@
       "has_sup": true,
       "cluster": "TP Thủ Đức, Quận 2",
       "type": "offline",
-      "target": 3,
+      "target": 1,
       "phanloai": "Định hình"
     },
     {
@@ -80,7 +80,7 @@
       "has_sup": true,
       "cluster": "Quận 4, 7, 8",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -89,7 +89,7 @@
       "has_sup": true,
       "cluster": "TP Thủ Dầu, Tỉnh Bình Dương",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -134,7 +134,7 @@
       "has_sup": true,
       "cluster": "Quận Gò Vấp - Tân Bình - Ninh Kiều",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -161,7 +161,7 @@
       "has_sup": true,
       "cluster": "Quận Gò Vấp - Tân Bình - Ninh Kiều",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -179,7 +179,7 @@
       "has_sup": true,
       "cluster": "Quận 12, Củ Chi, Long Xuyên",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -260,7 +260,7 @@
       "has_sup": true,
       "cluster": "Phía Đông Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -278,7 +278,7 @@
       "has_sup": true,
       "cluster": "Phía Nam Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 1,
       "phanloai": "Định hình"
     },
     {
@@ -287,7 +287,7 @@
       "has_sup": true,
       "cluster": "Phía Đông Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -305,7 +305,7 @@
       "has_sup": true,
       "cluster": "Phía Nam Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -314,7 +314,7 @@
       "has_sup": true,
       "cluster": "Phía Đông Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -323,7 +323,7 @@
       "has_sup": true,
       "cluster": "Phía Nam Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 2,
       "phanloai": "Bền vững"
     },
     {
@@ -341,7 +341,7 @@
       "has_sup": true,
       "cluster": "Phía Đông Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 1,
       "phanloai": "Định hình"
     },
     {
@@ -350,7 +350,7 @@
       "has_sup": true,
       "cluster": "Phía Đông Hà Nội",
       "type": "offline",
-      "target": 3,
+      "target": 1,
       "phanloai": "Định hình"
     },
     {

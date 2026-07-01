@@ -173,7 +173,7 @@
 let DATA = null, CHECK = [], VIEW = [];
 let sortKey = 'date', sortDir = 1;
 let TAB = 'visits';
-let ASSIGN = [], TOFF = 3, TON = 1;
+let ASSIGN = [], TON = 1;
 const ASSIGN_MAP = new Map();
 
 // === MỤC TIÊU ĐÀO TẠO THÁNG — sửa tay mỗi tháng ===
@@ -194,7 +194,7 @@ function load(){
     fetch('assignments.json?_=' + Date.now()).then(r=>r.json()).catch(()=>({target_visits:3,assignments:[]}))
   ]).then(([d,a])=>{
     DATA=d; CHECK=d.checklist_items||[];
-    ASSIGN=a.assignments||[]; TOFF=a.target_offline||3; TON=a.target_online||1;
+    ASSIGN=a.assignments||[]; TON=a.target_online||1;
     ASSIGN.forEach(x=>ASSIGN_MAP.set(skey(x.salon),x));
     init();
   }).catch(e=>{ document.getElementById('rows').innerHTML =
@@ -338,7 +338,7 @@ function renderSalon(){
   const offOk=off.filter(r=>r.done).length, onOk=on.filter(r=>r.done).length;
   const nosup=rows.filter(r=>!r.a.has_sup).length;
   document.getElementById('salonKpi').innerHTML=
-    `<span class="pill" style="background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);color:var(--green)">🏢 Offline đạt ≥${TOFF} lần: ${offOk}/${off.length}</span>
+    `<span class="pill" style="background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);color:var(--green)">🏢 Offline đạt mục tiêu: ${offOk}/${off.length}</span>
      <span class="pill" style="margin-left:8px;background:rgba(91,140,255,.15);border-color:rgba(91,140,255,.4);color:var(--accent)">💻 Online đạt ≥${TON} lần: ${onOk}/${on.length}</span>
      <span class="pill" style="margin-left:8px;color:var(--muted)">👤 Chưa có salesup: ${nosup}</span>`;
   const tb=document.getElementById('salonRows'); tb.innerHTML='';
@@ -385,7 +385,7 @@ function openSalonModal(r){
       </div>`).join('')
     : '<div class="nophoto">Chưa có lần đi nào.</div>';
   const tgtTxt = r.tgt>0 ? `${r.count}/${r.tgt} lần` : `${r.count} lần • không có mục tiêu`;
-  const typeTxt = a.type==='offline'?'🏢 offline (≥'+TOFF+' lần)' : a.type==='online'?'💻 online (≥'+TON+' lần)' : '';
+  const typeTxt = a.type==='offline'?'🏢 offline' : a.type==='online'?'💻 online (≥'+TON+' lần)' : '';
   m.innerHTML=`
     <span class="close" onclick="closeModal()">×</span>
     <h2>🏪 ${esc(a.salon)} <span class="badge ${r.done?'ok':'no'}">${tgtTxt}</span></h2>

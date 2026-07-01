@@ -2,9 +2,10 @@
 """
 Tạo assignments.json từ file phân cụm (salon -> salesup phụ trách + cụm + loại + mục tiêu).
 
-Mục tiêu nghiệm thu / tháng:
-  - salon offline: tối thiểu 3 lần
-  - salon online : tối thiểu 1 lần (nghiệm thu online)
+Mục tiêu đi salon / tháng:
+  - salon online : 1 lần (nghiệm thu online) — bất kể phân loại
+  - salon offline của Phương Anh: giữ 3 lần
+  - salon offline (salesup khác): theo Phân loại — Phát triển 3, Bền vững 2, Định hình 1
   - salon chưa có salesup: không có mục tiêu (ghi "không có salesup")
 
 Chạy: python build_assignments.py
@@ -17,6 +18,9 @@ import os
 TARGET_OFFLINE = 3
 TARGET_ONLINE = 1
 NO_SUP_LABEL = "không có salesup"
+# Mục tiêu đi salon offline theo Phân loại (áp cho mọi salesup trừ Phương Anh)
+TARGET_BY_LOAI = {"Phát triển": 3, "Bền vững": 2, "Định hình": 1}
+KEEP_OLD_SUP = "Nguyễn Thị Phương Anh"  # giữ nguyên mục tiêu offline cũ (3 lần)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CANDIDATES = [
@@ -43,9 +47,18 @@ def main():
                 continue
             sup = (r.get(COL_SUP) or "").strip()
             typ = (r.get(COL_ONLINE) or "").strip().lower()  # offline / online / ""
+            loai = (r.get(COL_LOAI) or "").strip()
             if not sup:
                 typ = ""  # chưa có salesup -> không phân loại mục tiêu
-            target = TARGET_OFFLINE if typ == "offline" else TARGET_ONLINE if typ == "online" else 0
+            if not sup:
+                target = 0
+            elif typ == "online":
+                target = TARGET_ONLINE                                  # online: 1 lần
+            elif typ == "offline":
+                target = TARGET_OFFLINE if sup == KEEP_OLD_SUP \
+                    else TARGET_BY_LOAI.get(loai, TARGET_OFFLINE)       # theo phân loại (fallback 3)
+            else:
+                target = 0
             rows.append({
                 "salon": salon,
                 "supervisor": sup if sup else NO_SUP_LABEL,
@@ -53,7 +66,7 @@ def main():
                 "cluster": (r.get(COL_CLUSTER) or "").strip(),
                 "type": typ,              # "offline" | "online" | ""
                 "target": target,         # 3 | 1 | 0
-                "phanloai": (r.get(COL_LOAI) or "").strip(),
+                "phanloai": loai,
             })
     data = {
         "target_offline": TARGET_OFFLINE,
