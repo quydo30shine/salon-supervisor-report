@@ -261,7 +261,7 @@ function buildMonthBtns(){
     : [...new Set((DATA.visits||[]).map(ymOf).filter(Boolean))].sort();
   const present=new Set((DATA.visits||[]).map(ymOf));
   const withData=months.filter(m=>present.has(m));
-  MONTH=(withData.length ? withData[withData.length-1] : months[months.length-1]) || '';  // mặc định: tháng mới nhất có dữ liệu
+  MONTH=(withData.length ? withData[0] : months[0]) || '';  // mặc định: tháng đầu tiên có dữ liệu (T6)
   wrap.innerHTML='<span class="mlbl">Kỳ báo cáo:</span>';
   months.forEach(m=>{
     const n=(DATA.visits||[]).filter(v=>ymOf(v)===m).length;
