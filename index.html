@@ -38,6 +38,13 @@
   .tab{padding:10px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;font-weight:600;font-size:14px}
   .tab:hover{color:var(--txt)}
   .tab.on{color:var(--txt);border-bottom-color:var(--accent)}
+  /* nút chọn tháng */
+  .months{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+  .months .mlbl{font-size:12px;color:var(--muted);margin-right:2px}
+  .mbtn{padding:8px 16px;border:1px solid var(--line);border-radius:20px;cursor:pointer;font-weight:600;font-size:14px;background:var(--card);color:var(--muted);user-select:none}
+  .mbtn:hover{border-color:var(--accent)}
+  .mbtn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .mbtn .mcount{font-size:11px;opacity:.85;font-weight:400;margin-left:3px}
   /* modal */
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow:auto;z-index:50}
   .overlay.on{display:flex}
@@ -73,6 +80,8 @@
   <div id="srcWarn"></div>
 
   <div class="cards" id="stats"></div>
+
+  <div class="months" id="monthBtns"></div>
 
   <div class="tabs">
     <div class="tab on" data-tab="visits">📋 Theo lượt đi</div>
@@ -173,6 +182,7 @@
 let DATA = null, CHECK = [], VIEW = [];
 let sortKey = 'date', sortDir = 1;
 let TAB = 'visits';
+let MONTH = '';
 let ASSIGN = [], TON = 1;
 const ASSIGN_MAP = new Map();
 
@@ -211,8 +221,10 @@ function init(){
   // fill filters
   const sups=[...new Set([...(DATA.visits||[]).map(v=>v.salesup), ...ASSIGN.map(a=>a.supervisor)].filter(Boolean))].sort();
   fillSelect('fSalesup', sups);
-  fillSelect('fSalon', uniq('salon'));
-  fillSelect('fDate', uniq('date'));
+  buildMonthBtns();                                    // tạo nút T6/T7 + đặt MONTH mặc định
+  const vsM=(DATA.visits||[]).filter(v=>ymOf(v)===MONTH);
+  fillSelect('fSalon', [...new Set(vsM.map(v=>v.salon).filter(Boolean))].sort());
+  fillSelect('fDate',  [...new Set(vsM.map(v=>v.date).filter(Boolean))].sort());
   ['fSalesup','fSalon','fDate'].forEach(id=>document.getElementById(id).onchange=render);
   document.getElementById('fSearch').oninput=render;
   document.getElementById('reset').onclick=()=>{
@@ -231,10 +243,42 @@ function init(){
   render();
 }
 
-function uniq(k){ return [...new Set((DATA.visits||[]).map(v=>v[k]).filter(Boolean))].sort(); }
 function fillSelect(id, arr){
   const s=document.getElementById(id);
   arr.forEach(x=>{ const o=document.createElement('option'); o.value=x; o.textContent=x; s.appendChild(o); });
+}
+function refillSelect(id, arr){                 // xoá cũ, giữ lại option đầu "— Tất cả —"
+  const s=document.getElementById(id); s.length=1; s.value='';
+  arr.forEach(x=>{ const o=document.createElement('option'); o.value=x; o.textContent=x; s.appendChild(o); });
+}
+// tháng của 1 lượt: dùng field ym, nếu thiếu thì suy từ ngày dd/mm/yyyy -> "yyyy-mm"
+function ymOf(v){ if(v.ym) return v.ym; const m=(v.date||'').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  return m ? m[3]+'-'+('0'+m[2]).slice(-2) : ''; }
+function monthLabel(ym){ const p=(ym||'').split('-'); return p.length===2 ? 'Tháng '+(+p[1]) : ym; }
+function buildMonthBtns(){
+  const wrap=document.getElementById('monthBtns');
+  const months=(DATA.months&&DATA.months.length) ? DATA.months.slice()
+    : [...new Set((DATA.visits||[]).map(ymOf).filter(Boolean))].sort();
+  const present=new Set((DATA.visits||[]).map(ymOf));
+  const withData=months.filter(m=>present.has(m));
+  MONTH=(withData.length ? withData[withData.length-1] : months[months.length-1]) || '';  // mặc định: tháng mới nhất có dữ liệu
+  wrap.innerHTML='<span class="mlbl">Kỳ báo cáo:</span>';
+  months.forEach(m=>{
+    const n=(DATA.visits||[]).filter(v=>ymOf(v)===m).length;
+    const b=document.createElement('div');
+    b.className='mbtn'+(m===MONTH?' on':''); b.dataset.m=m;
+    b.innerHTML=`${monthLabel(m)} <span class="mcount">${n}</span>`;
+    b.onclick=()=>setMonth(m);
+    wrap.appendChild(b);
+  });
+}
+function setMonth(m){
+  MONTH=m;
+  document.querySelectorAll('#monthBtns .mbtn').forEach(b=>b.classList.toggle('on', b.dataset.m===m));
+  const vs=(DATA.visits||[]).filter(v=>ymOf(v)===m);
+  refillSelect('fSalon', [...new Set(vs.map(v=>v.salon).filter(Boolean))].sort());
+  refillSelect('fDate',  [...new Set(vs.map(v=>v.date).filter(Boolean))].sort());
+  render();
 }
 
 function photosCount(v){ return CHECK.reduce((n,c)=>n+((v.items[c.key]||{}).count||0),0); }
@@ -248,6 +292,7 @@ function deployLabel(ok){ return ok
 function render(){
   const fs=val('fSalesup'), fl=val('fSalon'), fd=val('fDate'), q=val('fSearch').toLowerCase().trim();
   VIEW=(DATA.visits||[]).filter(v=>
+    (!MONTH||ymOf(v)===MONTH)&&
     (!fs||v.salesup===fs)&&(!fl||v.salon===fl)&&(!fd||v.date===fd)&&
     (!q||(v.salon+' '+v.salesup).toLowerCase().includes(q))
   );
@@ -508,8 +553,7 @@ function renderWeek(){
 }
 
 function renderStats(){
-  const all=DATA.visits||[];
-  const set=VIEW.length?VIEW:all;
+  const set=VIEW;
   const avg=set.length? set.reduce((s,v)=>s+v.completion,0)/set.length : 0;
   const salons=new Set(set.map(v=>v.salon)).size;
   const sups=new Set(set.map(v=>v.salesup)).size;

@@ -31,7 +31,7 @@ jobs:
           LARK_APP_TOKEN:  ${{ secrets.LARK_APP_TOKEN }}
           LARK_TABLE_ID:   ${{ secrets.LARK_TABLE_ID }}
           LARK_DOMAIN:     ${{ secrets.LARK_DOMAIN }}   # tùy chọn; bỏ trống = open.larksuite.com
-          SYNC_MONTH:      ${{ secrets.SYNC_MONTH }}    # tùy chọn; bỏ trống = 2026-06. Đổi tháng: cập nhật secret này
+          SYNC_MONTH:      "2026-06,2026-07"            # các tháng đưa vào báo cáo (nút T6/T7). Thêm tháng: nối bằng dấu phẩy
         run: python sync_lark.py
 
       - name: Commit kết quả

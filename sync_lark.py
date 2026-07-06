@@ -54,8 +54,22 @@ APP_ID = os.environ.get("LARK_APP_ID", "").strip()
 APP_SECRET = os.environ.get("LARK_APP_SECRET", "").strip()
 APP_TOKEN = os.environ.get("LARK_APP_TOKEN", "").strip()
 TABLE_ID = os.environ.get("LARK_TABLE_ID", "").strip()
-# Chỉ sync nghiệm thu của tháng này. Dạng "YYYY-MM" (vd 2026-06) hoặc "MM" (vd 06 = tháng 6 bất kỳ năm).
-SYNC_MONTH = os.environ.get("SYNC_MONTH", "").strip() or "2026-06"
+# Các tháng đưa vào báo cáo, phân tách bằng dấu phẩy. Mỗi phần dạng "YYYY-MM" (vd 2026-06) hoặc "MM".
+# VD: SYNC_MONTH="2026-06,2026-07" -> báo cáo có cả tháng 6 và tháng 7 (nút chuyển tháng trên web).
+SYNC_MONTH = os.environ.get("SYNC_MONTH", "").strip() or "2026-06,2026-07"
+SYNC_MONTHS = [m.strip() for m in SYNC_MONTH.split(",") if m.strip()]
+
+
+def _month_key(s):
+    """'2026-06' -> (2026, 6); '06' -> (None, 6)."""
+    s = s.strip()
+    if "-" in s:
+        yy, mm = s.split("-")[:2]
+        return (int(yy), int(mm))
+    return (None, int(s))
+
+
+_MONTH_TARGETS = [_month_key(m) for m in SYNC_MONTHS]
 
 # Quy đổi tên salon đã đổi tên -> tên chuẩn hiện tại, để gộp bản ghi cũ + mới về cùng 1 salon.
 SALON_ALIASES = {
@@ -189,10 +203,10 @@ def parse_ym(val):
 def match_month(y, mo):
     if mo is None:
         return False
-    if "-" in SYNC_MONTH:
-        yy, mm = SYNC_MONTH.split("-")
-        return y == int(yy) and mo == int(mm)
-    return mo == int(SYNC_MONTH)
+    for (ty, tm) in _MONTH_TARGETS:
+        if tm == mo and (ty is None or ty == y):
+            return True
+    return False
 
 
 def main():
@@ -249,6 +263,7 @@ def main():
         visits.append({
             "id": rec.get("record_id", f"r{i+1}"),
             "date": fmt_date(f.get(COL_DATE)),
+            "ym": f"{y:04d}-{mo:02d}" if (y and mo) else "",   # tháng của lượt (để lọc nút T6/T7)
             "submitted_on": field_text(f.get(COL_SUBMIT)),
             "salesup": salesup,
             "salon": salon,
@@ -264,12 +279,16 @@ def main():
         "generated_at": time.strftime("%d/%m/%Y %H:%M", time.gmtime(time.time() + 7 * 3600)),
         "source": "lark",
         "month": SYNC_MONTH,
+        "months": SYNC_MONTHS,
         "checklist_items": [{"key": k, "label": lbl} for k, _c, lbl in CHECKLIST],
         "visits": visits,
     }
     with open(os.path.join(HERE, "data.json"), "w", encoding="utf-8") as fp:
         json.dump(data, fp, ensure_ascii=False, indent=2)
-    print(f"OK: thang {SYNC_MONTH} | {len(visits)} luot di salon, {img_total} anh | bo qua {skipped} ban ghi ngoai thang")
+    from collections import Counter
+    per_month = Counter(v["ym"] for v in visits)
+    by_month = ", ".join(f"{m}={per_month.get(m,0)}" for m in SYNC_MONTHS)
+    print(f"OK: {len(visits)} luot ({by_month}), {img_total} anh | bo qua {skipped} ban ghi ngoai thang")
     if skipped_dates:
         uniq = sorted(set(skipped_dates))
         print("  Ngay bi bo qua (mau):", ", ".join(uniq[:15]))
