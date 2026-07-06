@@ -1,7 +1,11 @@
 {
-  "generated_at": "06/07/2026 10:01",
+  "generated_at": "06/07/2026 12:16",
   "source": "lark",
-  "month": "2026-06",
+  "month": "2026-06,2026-07",
+  "months": [
+    "2026-06",
+    "2026-07"
+  ],
   "checklist_items": [
     {
       "key": "front",
@@ -44,6 +48,7 @@
     {
       "id": "rec27yrHd3LTtW",
       "date": "05/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780879439000",
       "salesup": "Phạm Thị Nga",
       "salon": "55A NVL",
@@ -134,6 +139,7 @@
     {
       "id": "rec27yrLRxQWWj",
       "date": "04/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780879703000",
       "salesup": "Phạm Thị Nga",
       "salon": "202 DC",
@@ -231,6 +237,7 @@
     {
       "id": "rec27ys6NNiDyV",
       "date": "04/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780880893000",
       "salesup": "Phạm Thị Nga",
       "salon": "39 HBT",
@@ -326,6 +333,7 @@
     {
       "id": "rec27ysbYFUAI2",
       "date": "03/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780881187000",
       "salesup": "Phạm Thị Nga",
       "salon": "109 TQH",
@@ -413,6 +421,7 @@
     {
       "id": "rec27ysfnhXUmx",
       "date": "03/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780881380000",
       "salesup": "Phạm Thị Nga",
       "salon": "11 PKT",
@@ -505,6 +514,7 @@
     {
       "id": "rec27ysl71NCRe",
       "date": "02/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780881705000",
       "salesup": "Phạm Thị Nga",
       "salon": "382 NT",
@@ -597,6 +607,7 @@
     {
       "id": "rec27yuHWmcDu2",
       "date": "03/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780890045000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "1180 QT",
@@ -680,6 +691,7 @@
     {
       "id": "rec27yuKvGYESW",
       "date": "05/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780890191000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "927 HG",
@@ -763,6 +775,7 @@
     {
       "id": "rec27yuWngMZnM",
       "date": "05/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780890865000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "730 TL10",
@@ -845,6 +858,7 @@
     {
       "id": "rec27yuYMoc88j",
       "date": "06/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780891002000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "145 THT",
@@ -928,6 +942,7 @@
     {
       "id": "rec27yv0pwLEcG",
       "date": "06/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1780891094000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "575 AC",
@@ -1010,6 +1025,7 @@
     {
       "id": "rec27zNgOtvZRP",
       "date": "11/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781173755000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "103 TN",
@@ -1094,6 +1110,7 @@
     {
       "id": "rec27zNm22bKHM",
       "date": "10/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781174052000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "25 TD",
@@ -1177,6 +1194,7 @@
     {
       "id": "rec27B2KEdqslg",
       "date": "09/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781446614000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "99 TSN",
@@ -1261,6 +1279,7 @@
     {
       "id": "rec27B2U7mkVki",
       "date": "10/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781447152000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "312 LVS",
@@ -1343,6 +1362,7 @@
     {
       "id": "rec27B2YgAxikI",
       "date": "10/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781447388000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "8 CVL",
@@ -1426,6 +1446,7 @@
     {
       "id": "rec27B33bZUvrD",
       "date": "10/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781447668000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "190 HB",
@@ -1509,6 +1530,7 @@
     {
       "id": "rec27B3a3pWfB2",
       "date": "11/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781448057000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "1180 QT",
@@ -1592,6 +1614,7 @@
     {
       "id": "rec27B3f1mUvNi",
       "date": "12/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781448339000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "575 AC",
@@ -1676,6 +1699,7 @@
     {
       "id": "rec27B3l7jW16h",
       "date": "13/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781448686000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "237 NTT",
@@ -1760,6 +1784,7 @@
     {
       "id": "rec27BdSiYtGkg",
       "date": "11/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781485787000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "103 TN",
@@ -1845,6 +1870,7 @@
     {
       "id": "rec27Bf7mctZHT",
       "date": "08/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781490163000",
       "salesup": "Phạm Thị Nga",
       "salon": "173 TN",
@@ -1935,6 +1961,7 @@
     {
       "id": "rec27BfehLvMvV",
       "date": "08/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781490557000",
       "salesup": "Phạm Thị Nga",
       "salon": "50BT4 NPC LD",
@@ -2032,6 +2059,7 @@
     {
       "id": "rec27Bfr5fTGmk",
       "date": "09/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781491284000",
       "salesup": "Phạm Thị Nga",
       "salon": "168 NVC",
@@ -2124,6 +2152,7 @@
     {
       "id": "rec27BfxxeQJqd",
       "date": "09/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781491650000",
       "salesup": "Phạm Thị Nga",
       "salon": "39 HBT",
@@ -2221,6 +2250,7 @@
     {
       "id": "rec27BfCf6IJIc",
       "date": "09/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781491918000",
       "salesup": "Phạm Thị Nga",
       "salon": "148 TD",
@@ -2314,6 +2344,7 @@
     {
       "id": "rec27BfKG0sjAy",
       "date": "10/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781492397000",
       "salesup": "Phạm Thị Nga",
       "salon": "65 CD",
@@ -2404,6 +2435,7 @@
     {
       "id": "rec27BfNRPJkkf",
       "date": "12/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781492578000",
       "salesup": "Phạm Thị Nga",
       "salon": "62 LH",
@@ -2495,6 +2527,7 @@
     {
       "id": "rec27BfVBYVdVq",
       "date": "11/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1781493018000",
       "salesup": "Phạm Thị Nga",
       "salon": "55A NVL",
@@ -2584,6 +2617,7 @@
     {
       "id": "rec27DI3h9g2Bj",
       "date": "15/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782028739000",
       "salesup": "Phạm Thị Nga",
       "salon": "11 PKT",
@@ -2676,6 +2710,7 @@
     {
       "id": "rec27DI8x4HpKk",
       "date": "15/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782029037000",
       "salesup": "Phạm Thị Nga",
       "salon": "173 TN",
@@ -2768,6 +2803,7 @@
     {
       "id": "rec27DId09V8ti",
       "date": "16/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782029291000",
       "salesup": "Phạm Thị Nga",
       "salon": "39 HBT",
@@ -2858,6 +2894,7 @@
     {
       "id": "rec27DOtyITvFR",
       "date": "17/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782051361000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "12 LDT",
@@ -2941,6 +2978,7 @@
     {
       "id": "rec27DOBncviJJ",
       "date": "17/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782051805000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "483 TN",
@@ -3026,6 +3064,7 @@
     {
       "id": "rec27DPndGMX8R",
       "date": "16/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782054523000",
       "salesup": "Phạm Thị Nga",
       "salon": "202 DC",
@@ -3134,6 +3173,7 @@
     {
       "id": "rec27DPqLOuAZr",
       "date": "16/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782054724000",
       "salesup": "Phạm Thị Nga",
       "salon": "148 TD",
@@ -3221,6 +3261,7 @@
     {
       "id": "rec27DPu3hGISF",
       "date": "17/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782054911000",
       "salesup": "Phạm Thị Nga",
       "salon": "10 TP",
@@ -3314,6 +3355,7 @@
     {
       "id": "rec27DPzoSYMzp",
       "date": "17/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782055215000",
       "salesup": "Phạm Thị Nga",
       "salon": "55A NVL",
@@ -3402,6 +3444,7 @@
     {
       "id": "rec27DPCrCEdea",
       "date": "18/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782055388000",
       "salesup": "Phạm Thị Nga",
       "salon": "382 NT",
@@ -3492,6 +3535,7 @@
     {
       "id": "rec27DPFloVx8a",
       "date": "19/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782055552000",
       "salesup": "Phạm Thị Nga",
       "salon": "62 LH",
@@ -3583,6 +3627,7 @@
     {
       "id": "rec27DPHPc8T69",
       "date": "19/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782055693000",
       "salesup": "Phạm Thị Nga",
       "salon": "65 CD",
@@ -3681,6 +3726,7 @@
     {
       "id": "rec27DQRMyi386",
       "date": "18/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782059780000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "312 LVS",
@@ -3765,6 +3811,7 @@
     {
       "id": "rec27DR2MKB4jN",
       "date": "18/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782060405000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "145 THT",
@@ -3852,6 +3899,7 @@
     {
       "id": "rec27DRas7etp1",
       "date": "19/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782060841000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "8 CVL",
@@ -3938,6 +3986,7 @@
     {
       "id": "rec27DZ2EioQef",
       "date": "01/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782088571000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "1146 KVC",
@@ -4021,6 +4070,7 @@
     {
       "id": "rec27DZ7ahAVbh",
       "date": "05/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782088827000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "341 XVNT",
@@ -4104,6 +4154,7 @@
     {
       "id": "rec27DZ8XibfuA",
       "date": "09/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782088929000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "255 NAN",
@@ -4187,6 +4238,7 @@
     {
       "id": "rec27DZhI84GaL",
       "date": "12/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782089426000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "420 HTP",
@@ -4270,6 +4322,7 @@
     {
       "id": "rec27DZly8gUf7",
       "date": "13/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782089644000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "255 NAN",
@@ -4354,6 +4407,7 @@
     {
       "id": "rec27DZosXmbf2",
       "date": "14/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782089810000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "1146 KVC",
@@ -4439,6 +4493,7 @@
     {
       "id": "rec27DZrfilim9",
       "date": "14/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782089968000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "80 PL BD",
@@ -4523,6 +4578,7 @@
     {
       "id": "rec27DZE0uGNyb",
       "date": "15/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782090692000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "401/1 NDT",
@@ -4606,6 +4662,7 @@
     {
       "id": "rec27DZFtlFKlA",
       "date": "16/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782090776000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "103 TN",
@@ -4689,6 +4746,7 @@
     {
       "id": "rec27DZGLyQPAa",
       "date": "17/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782090849000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "36 N1 BD",
@@ -4773,6 +4831,7 @@
     {
       "id": "rec27DZIlSJnqd",
       "date": "17/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782090939000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "80 PL BD",
@@ -4855,6 +4914,7 @@
     {
       "id": "rec27DZKeILoTI",
       "date": "18/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782091046000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "255 NAN",
@@ -4937,6 +4997,7 @@
     {
       "id": "rec27DZNowv9iG",
       "date": "18/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782091226000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "1146 KVC",
@@ -5021,6 +5082,7 @@
     {
       "id": "rec27DZPHYu1o9",
       "date": "19/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782091357000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "420 HTP",
@@ -5104,6 +5166,7 @@
     {
       "id": "rec27DZR9KZnTw",
       "date": "06/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782091439000",
       "salesup": "Nguyễn Thị Phương Anh",
       "salon": "362 NGT BN",
@@ -5189,6 +5252,7 @@
     {
       "id": "rec27E0Ru4elL7",
       "date": "11/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782094980000",
       "salesup": "Nguyễn Thị Phương Anh",
       "salon": "4 LQD BN",
@@ -5282,6 +5346,7 @@
     {
       "id": "rec27E0TBFy7H5",
       "date": "16/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782095100000",
       "salesup": "Nguyễn Thị Phương Anh",
       "salon": "362 NGT BN",
@@ -5368,6 +5433,7 @@
     {
       "id": "rec27E0X3JxXNZ",
       "date": "21/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782095296000",
       "salesup": "Nguyễn Thị Phương Anh",
       "salon": "4 LQD BN",
@@ -5453,6 +5519,7 @@
     {
       "id": "rec27E16ueKzRV",
       "date": "19/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782095832000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "927 HG",
@@ -5538,6 +5605,7 @@
     {
       "id": "rec27E1a26i1XD",
       "date": "19/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782096033000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "730 TL10",
@@ -5622,6 +5690,7 @@
     {
       "id": "rec27E1Jp17Mc9",
       "date": "20/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782098042000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "190 HB",
@@ -5710,6 +5779,7 @@
     {
       "id": "rec27E1NOPyyaw",
       "date": "20/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782098293000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "575 AC",
@@ -5795,6 +5865,7 @@
     {
       "id": "rec27FovwF4G66",
       "date": "25/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782396591000",
       "salesup": "Nguyễn Thị Phương Anh",
       "salon": "362 NGT BN",
@@ -5882,6 +5953,7 @@
     {
       "id": "rec27GJRKatt4W",
       "date": "22/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782690147000",
       "salesup": "Phạm Thị Nga",
       "salon": "173 TN",
@@ -5975,6 +6047,7 @@
     {
       "id": "rec27GJVw3ljxR",
       "date": "22/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782690361000",
       "salesup": "Phạm Thị Nga",
       "salon": "50BT4 NPC LD",
@@ -6063,6 +6136,7 @@
     {
       "id": "rec27GJZvcsjUq",
       "date": "23/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782690588000",
       "salesup": "Phạm Thị Nga",
       "salon": "10 TP",
@@ -6161,6 +6235,7 @@
     {
       "id": "rec27GK3aMugYg",
       "date": "25/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782690796000",
       "salesup": "Phạm Thị Nga",
       "salon": "202 DC",
@@ -6255,6 +6330,7 @@
     {
       "id": "rec27GK7nDVjcd",
       "date": "25/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782691035000",
       "salesup": "Phạm Thị Nga",
       "salon": "39 HBT",
@@ -6347,6 +6423,7 @@
     {
       "id": "rec27GKa4SaySG",
       "date": "26/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782691189000",
       "salesup": "Phạm Thị Nga",
       "salon": "168 NVC",
@@ -6441,6 +6518,7 @@
     {
       "id": "rec27GKcyt8gSa",
       "date": "26/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782691329000",
       "salesup": "Phạm Thị Nga",
       "salon": "148 TD",
@@ -6528,6 +6606,7 @@
     {
       "id": "rec27GKfCD7bHQ",
       "date": "27/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782691503000",
       "salesup": "Phạm Thị Nga",
       "salon": "382 NT",
@@ -6616,6 +6695,7 @@
     {
       "id": "rec27GKhfFfwVE",
       "date": "27/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782691596000",
       "salesup": "Phạm Thị Nga",
       "salon": "55A NVL",
@@ -6708,6 +6788,7 @@
     {
       "id": "rec27GLfeIOe3S",
       "date": "23/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782695003000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "255 NAN",
@@ -6791,6 +6872,7 @@
     {
       "id": "rec27GLQDQV6Vi",
       "date": "23/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782697128000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "190 HB",
@@ -6876,6 +6958,7 @@
     {
       "id": "rec27GMgSLSIhC",
       "date": "24/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782698618000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "575 AC",
@@ -6959,6 +7042,7 @@
     {
       "id": "rec27GMjUnuCmz",
       "date": "24/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782698790000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "76 PVH",
@@ -7042,6 +7126,7 @@
     {
       "id": "rec27GMuXPs3OT",
       "date": "24/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782699418000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "1180 QT",
@@ -7125,6 +7210,7 @@
     {
       "id": "rec27GMA7t0J6m",
       "date": "23/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782699711000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "99 TSN",
@@ -7211,6 +7297,7 @@
     {
       "id": "rec27GMSuQllQN",
       "date": "26/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782700755000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "145 THT",
@@ -7295,6 +7382,7 @@
     {
       "id": "rec27GN47yHpTR",
       "date": "26/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782701415000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "927 HG",
@@ -7381,6 +7469,7 @@
     {
       "id": "rec27GN5eYdRYk",
       "date": "24/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782701479000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "103 TN",
@@ -7463,6 +7552,7 @@
     {
       "id": "rec27GN8es35Zv",
       "date": "25/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782701649000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "25 TD",
@@ -7547,6 +7637,7 @@
     {
       "id": "rec27GNaKSl9ze",
       "date": "25/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782701792000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "420 HTP",
@@ -7631,6 +7722,7 @@
     {
       "id": "rec27GNdY77IwN",
       "date": "26/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782701974000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "80 PL BD",
@@ -7713,6 +7805,7 @@
     {
       "id": "rec27GNf1WQfQW",
       "date": "25/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782702035000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "36 N1 BD",
@@ -7796,6 +7889,7 @@
     {
       "id": "rec27GNgtrxwGG",
       "date": "28/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782702117000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "36 N1 BD",
@@ -7879,6 +7973,7 @@
     {
       "id": "rec27GNgvOh9Ps",
       "date": "27/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782702119000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "237 NTT",
@@ -7964,6 +8059,7 @@
     {
       "id": "rec27Hgjh60YVC",
       "date": "29/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782804403000",
       "salesup": "Phạm Thị Nga",
       "salon": "595 BT TH",
@@ -8050,6 +8146,7 @@
     {
       "id": "rec27Hh6g1Jr4V",
       "date": "29/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782807185000",
       "salesup": "Phạm Thị Nga",
       "salon": "80 TP TH",
@@ -8137,6 +8234,7 @@
     {
       "id": "rec27HAeroRWCO",
       "date": "29/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782874560000",
       "salesup": "Phạm Thị Nga",
       "salon": "290 QT TH",
@@ -8226,6 +8324,7 @@
     {
       "id": "rec27HAgmSIIkq",
       "date": "30/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782874670000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "186 DTH",
@@ -8310,6 +8409,7 @@
     {
       "id": "rec27HAhxHxP76",
       "date": "29/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782874737000",
       "salesup": "Phạm Thị Nga",
       "salon": "304 NT TH",
@@ -8397,6 +8497,7 @@
     {
       "id": "rec27HAiMdBCJr",
       "date": "30/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782874807000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "236 DBT",
@@ -8480,6 +8581,7 @@
     {
       "id": "rec27HAojBabte",
       "date": "29/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782875121000",
       "salesup": "Phạm Thị Nga",
       "salon": "10 TP",
@@ -8569,6 +8671,7 @@
     {
       "id": "rec27HAu0z0lgk",
       "date": "30/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782875445000",
       "salesup": "Phạm Thị Nga",
       "salon": "50BT4 NPC LD",
@@ -8660,6 +8763,7 @@
     {
       "id": "rec27HEOTwv8l5",
       "date": "30/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782890717000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "1371 PVT",
@@ -8743,6 +8847,7 @@
     {
       "id": "rec27HESWqjIgp",
       "date": "30/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782890947000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "341 XVNT",
@@ -8825,6 +8930,7 @@
     {
       "id": "rec27HEUfmqrZm",
       "date": "30/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782891021000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "25 TD",
@@ -8907,6 +9013,7 @@
     {
       "id": "rec27HEWsVtHpx",
       "date": "30/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782891147000",
       "salesup": "Nguyễn Thị Thanh Tâm",
       "salon": "401/1 NDT",
@@ -8990,6 +9097,7 @@
     {
       "id": "rec27HF28NDVWh",
       "date": "26/06/2026",
+      "ym": "2026-06",
       "submitted_on": "1782891470000",
       "salesup": "Ngô Thị Mai Loan",
       "salon": "730 TL10",
@@ -9067,6 +9175,540 @@
             "images/TY3zbARqboL2yfxaA4OlYfHEgFg.JPEG"
           ],
           "count": 1,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27JoG9X4hCA",
+      "date": "02/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783270556000",
+      "salesup": "Ngô Thị Mai Loan",
+      "salon": "312 LVS",
+      "missing_materials": "",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "1 sup, 1 skn",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/NszQbK0g7ovnKzxIbAplsG1zgRf.JPEG",
+            "images/F2KtbDQy1onNTvxf22llILyVgRg.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/XHXTbUDKooh3R8xdp2slwndcgMG.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/EL8tbMi5JosEQ0xsS72ls5SXgeG.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/XOi9botfbo7bJ2xU7qMlCAvTg0b.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/QlKubypIYor1yMx9MX1lMZzsggb.JPEG",
+            "images/Wtvbb8OXfoW0oyxzETylq8jtgMd.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/IxVPbvULAojvYgxV6OslN6WTgre.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/OsKTb6wM1o5h6Zxs86alkcMngcb.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27JoPcNqlcx",
+      "date": "02/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783271069000",
+      "salesup": "Ngô Thị Mai Loan",
+      "salon": "145 THT",
+      "missing_materials": "",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "2skn 2 sup",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/SL1rbgmSHoDfpEx0GzzlYf76gtf.JPEG",
+            "images/D8m6bp6kNoZXLZxkoerlfQbNg6c.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/X7NVb2Na8ocoVrxnUfXluBssgte.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/JcMMb1TkHoekz3x4OuplMrfjgIi.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/J0HVbXN9EoGjuqxcIJAl6snFgld.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/EtRdbzfvjotPj8xRC92lZx2kguf.JPEG",
+            "images/LdmAb4Wykooo9fxxcJ8lMVQ2gXZ.JPEG",
+            "images/CPLTbuaKaoyzzOxPGpqlFf0tgIo.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/SuhGbYTyWo3Nj4xCylMlKfqKg0b.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/AP1ibwX6Oo9EZMxEazvlcHiXgUb.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27JoRyhb09b",
+      "date": "02/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783271203000",
+      "salesup": "Ngô Thị Mai Loan",
+      "salon": "99 TSN",
+      "missing_materials": "",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "1 Stl, 4 skn",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/BZKjbZ7bkoxIBDxlD6flPbvGgJf.JPEG",
+            "images/Qqj9biZKWoPNz9xWGJVlbHHhgzB.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/UkUIbVjHEooXymxkElwl7qybgmb.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/PIZMb5SkTokIePxGLEnlSThagef.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/S5cPb1vXzoEuE8xoV0Llzqo0gYb.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/XjV0bhUkuoZVngxgHOulfE8GgHd.JPEG",
+            "images/MEXXbSTH7ok1U1xQa9Al3ofxg6g.JPEG",
+            "images/PIhWbN39roGJ3px0GXGlkfGTghG.JPEG",
+            "images/JsdmbOgR5o4nL2x7vP6lYe6BgNG.JPEG"
+          ],
+          "count": 4,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/Yg1bbCupZoyB2Lx0FsilRp9BgZd.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/FQWLbzlBEomqwFx0JErlGe80g0f.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27JwziyUvt4",
+      "date": "02/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783298339000",
+      "salesup": "Phạm Thị Nga",
+      "salon": "11 PKT",
+      "missing_materials": "đủ",
+      "menu_issue": "không",
+      "skinner_checked": "",
+      "skinner_trained": "3 skinner, 2 sup",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/Fi4xb3yj5oodExx0UmLlcHWWgnf.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/NpzAbDptmoWY45xbrwLl4iYHgfc.JPEG",
+            "images/EHD3bG2wvo11H0x7shSlm5BRgMe.JPEG",
+            "images/MBEcbHfdtomQg5xpBxolOjRGgcf.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/NqXRbrF0doiqDGxWVcQlq8I4g9g.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/FCiwb7QlCoGErzxakF3lEhTjgqb.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/PQz6bKojRoIgXjxPUsVluuo5g8b.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/Vi0Mbuf7Po9qX6xj1p8lMKz5gxg.JPEG",
+            "images/IXpmbhqulov7MTxaTWyl0nuYgdf.JPEG",
+            "images/MZ8xbp5rhoNoW0xXtDhlsiECgqd.JPEG",
+            "images/RV7nbFLrPotwrmx9599l2mkYgje.JPEG"
+          ],
+          "count": 4,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/Z2qjbzq7Ao09vrxlRFclxWEIgNb.JPEG",
+            "images/Aaj6bezZDobcJdxNP0LlUtXIgBg.JPEG",
+            "images/UPhebjoCooYVnlxkSusllp4zgof.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27JwCYtLXKn",
+      "date": "02/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783298548000",
+      "salesup": "Phạm Thị Nga",
+      "salon": "10 TP",
+      "missing_materials": "đủ",
+      "menu_issue": "không",
+      "skinner_checked": "",
+      "skinner_trained": "1 skinner 2 sup",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/S0ATbOSNxoNEcwxKHXEl9Swhgub.JPEG",
+            "images/ZEH0bH15MoFr9wxcxSflKoX8gQ0.JPEG",
+            "images/OZJobYTaAob71pxlFIrl9ye3gqf.JPEG",
+            "images/OyUwbBgDFoWiLOxRuailsMBjgBl.JPEG",
+            "images/EGdqbBJpAoROavxWq75lDZDYg3g.JPEG"
+          ],
+          "count": 5,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/MkxgbnZkSoDHKnxnUOjlyEXEgUc.JPEG",
+            "images/YgDEb8iIHo6zEmxkeIllalBHgWe.JPEG",
+            "images/OSGEb2tEjokfwZxPRnTlw9ArgKf.JPEG",
+            "images/QEdyb2oHLov7xUxpCNUlNvgcgKf.JPEG",
+            "images/N7elbzS21oVCq9xTG93lAhgbgmb.JPEG"
+          ],
+          "count": 5,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/FZrSbk99Ho7kOzxiR9NlD6Vpgae.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/TFDcbVRjCooVJAxoaNrlWtOHggb.mp4"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/LmKfbm18GoZ3cmxcDPIl9oDggRh.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/LcOibntb7oyVHWxuotvlUH8Zgag.JPEG",
+            "images/Ns3tbonPMoV3fVxV1xJlRgzvgrh.JPEG",
+            "images/VsCPbwog1oBPGfx1z4rlbW92gPc.JPEG",
+            "images/Fh5zbOXeVoel9Ix9YlzlA7yjgFh.JPEG",
+            "images/ALrobB0Suo67jDxmCP4ls55Cgyc.JPEG"
+          ],
+          "count": 5,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/C1bHbpLwGok5i0x2JlLlwrQOgWf.JPEG",
+            "images/NOaNbqUfMo0Zp3xIFnJlkvw3gwf.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        }
+      },
+      "completion": 1.0
+    },
+    {
+      "id": "rec27JwFUt6G1F",
+      "date": "03/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783298714000",
+      "salesup": "Phạm Thị Nga",
+      "salon": "39 HBT",
+      "missing_materials": "đủ",
+      "menu_issue": "chỉnh lại Menu Relax",
+      "skinner_checked": "",
+      "skinner_trained": "1 SM, 1 stylist",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/I9U2bzc3eoMsAbxOBlTlQX8lgNh.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/Gb6bb4rUEovtHxx63SrlbEfegNd.JPEG",
+            "images/BhxDb4ye5occr1xq2wllYTW9gNh.JPEG",
+            "images/NOcCbJhGdoUoUjxmPcilpTZ3gQe.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/RaGwbbc6Soz4tQxnaRSlYLYzgng.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "relax": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "und": {
+          "done": true,
+          "images": [],
+          "count": 0,
+          "raw": "True"
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/KQbTbFJRGown05xudqwleqHpgef.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/Cc7wbNU6uod60yxbRielbhHRgIg.JPEG",
+            "images/TiwWbVMOloFsB5xjak2lZY09g5g.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/WnjQbz317ozq7ExRnpKlr16Mg9e.JPEG",
+            "images/Df03bK2E1ojqmDxZnAjlxoJSgfd.JPEG",
+            "images/Vwlsbyi3voc0gGxjecdlpkIDgXc.JPEG"
+          ],
+          "count": 3,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/IlC1bBgzPoCDD8x9s6llrrnNgIe.JPEG",
+            "images/RCHrbV6ZZoldU8xwvOwl1vFtgud.JPEG",
+            "images/YX95buxtOo8KDXxWHWIlHpZ8gWg.JPEG"
+          ],
+          "count": 3,
           "raw": ""
         }
       },
