@@ -50,17 +50,18 @@ GROUPS = {
     "ctkm":     ["ctkm", "ctkm2"],
 }
 
-# Checkbox vật tư — "tích đủ" = tích hết các ô này.
+# Checkbox vật tư. required=True là ô dùng để xét "tích đủ".
+# Các ô mới thêm vào form (required=False) chưa có ở bản ghi cũ -> chỉ hiển thị, không xét.
 SUPPLIES = [
-    ("dungcu_phamau", "Dụng cụ pha màu (Bát nhuộm, lược nhuộm)",            "Dụng cụ pha màu"),
-    ("bangmau",       "Bảng màu",                                           "Bảng màu"),
-    ("mau_oxy",       "Màu nhuộm, Oxy",                                     "Màu nhuộm, Oxy"),
-    ("thuoc_uon",     "Thuốc uốn 1,2",                                      "Thuốc uốn 1,2"),
-    ("thuoc_ep",      "Thuốc Ép 1,2",                                       "Thuốc Ép 1,2"),
-    ("dungcu_uon",    "Dụng cụ uốn tóc (chun vòng, tăm bông, giấy uốn,..)", "Dụng cụ uốn tóc"),
-    ("relax",         "Vật tư Relax/Spa",                                   "Vật tư Relax/Spa"),
-    ("und",           "Vật tư UND",                                         "Vật tư UND"),
-    ("sku20",         "20 SKU bán chạy",                                    "20 SKU bán chạy"),
+    ("dungcu_phamau", "Dụng cụ pha màu (Bát nhuộm, lược nhuộm)",            "Dụng cụ pha màu",   False),
+    ("bangmau",       "Bảng màu",                                           "Bảng màu",          False),
+    ("mau_oxy",       "Màu nhuộm, Oxy",                                     "Màu nhuộm, Oxy",    False),
+    ("thuoc_uon",     "Thuốc uốn 1,2",                                      "Thuốc uốn 1,2",     False),
+    ("thuoc_ep",      "Thuốc Ép 1,2",                                       "Thuốc Ép 1,2",      False),
+    ("dungcu_uon",    "Dụng cụ uốn tóc (chun vòng, tăm bông, giấy uốn,..)", "Dụng cụ uốn tóc",   False),
+    ("relax",         "Vật tư Relax/Spa",                                   "Vật tư Relax/Spa",  True),
+    ("und",           "Vật tư UND",                                         "Vật tư UND",        True),
+    ("sku20",         "20 SKU bán chạy",                                    "20 SKU bán chạy",   False),
 ]
 
 # Tên chương trình khuyến mãi salesup đã nghiệm thu
@@ -301,7 +302,7 @@ def main():
                 "raw": "" if atts else field_text(val),
             }
         # checkbox vật tư
-        supplies = {k: field_bool(f.get(col)) for k, col, _lb in SUPPLIES}
+        supplies = {k: field_bool(f.get(col)) for k, col, _lb, _rq in SUPPLIES}
         supplies_done = sum(1 for v in supplies.values() if v)
         # tên CTKM đã nghiệm thu
         ctkm_names = [n for n in (field_text(f.get(COL_CTKM_NAME)),
@@ -332,7 +333,7 @@ def main():
         "months": SYNC_MONTHS,
         "checklist_items": [{"key": k, "label": lbl, "optional": k in OPTIONAL_KEYS}
                             for k, _c, lbl in CHECKLIST],
-        "supply_items": [{"key": k, "label": lbl} for k, _c, lbl in SUPPLIES],
+        "supply_items": [{"key": k, "label": lbl, "required": rq} for k, _c, lbl, rq in SUPPLIES],
         "groups": GROUPS,
         "visits": visits,
     }

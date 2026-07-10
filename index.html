@@ -307,9 +307,15 @@ function cellTrungbay(v){                       // có ảnh -> đã nghiệm th
   const n=groupCount(v,G('trungbay'));
   return (n?okText('Đã nghiệm thu'):noText('Chưa nghiệm thu')) + (n?photoBtn(v,'trungbay',n):'');
 }
-function cellVattu(v){                          // tích đủ checkbox -> đã nghiệm thu; nút mở ảnh Skinner + trạng thái từng ô
-  const d=v.supplies_done||0, t=v.supplies_total||0, n=groupCount(v,G('vattu'));
-  const txt=(t>0&&d>=t) ? okText('Đã nghiệm thu') : noText(`Chưa nghiệm thu${t?` (${d}/${t})`:''}`);
+// "Tích đủ" chỉ xét các ô required (Relax/Spa, UND). Các ô mới thêm chỉ hiển thị trong popup.
+function vattuReq(v){
+  const req=(DATA.supply_items||[]).filter(s=>s.required);
+  if(req.length) return {done:req.filter(s=>(v.supplies||{})[s.key]).length, total:req.length};
+  return {done:v.supplies_done||0, total:v.supplies_total||0};   // fallback data cũ
+}
+function cellVattu(v){                          // tích đủ -> đã nghiệm thu; nút mở ảnh Skinner + trạng thái từng ô
+  const r=vattuReq(v), n=groupCount(v,G('vattu'));
+  const txt=(r.total>0&&r.done>=r.total) ? okText('Đã nghiệm thu') : noText(`Chưa nghiệm thu${r.total?` (${r.done}/${r.total})`:''}`);
   return txt + photoBtn(v,'vattu',n);
 }
 function cellCtkm(v){                           // đã/chưa + tên CTKM + nút ảnh
@@ -644,12 +650,15 @@ function openPhotos(id, group){
   const titles={trungbay:'Nghiệm thu trưng bày', vattu:'Nghiệm thu vật tư', ctkm:'Nghiệm thu triển khai CTKM'};
   let body='';
   if(group==='vattu'){                                   // trạng thái từng ô checkbox
-    const d=v.supplies_done||0, t=v.supplies_total||0;
-    const list=(DATA.supply_items||[]).map(s=>
-      `<div>${(v.supplies||{})[s.key]?'✅':'❌'} ${esc(s.label)}</div>`).join('');
+    const r=vattuReq(v), all=(DATA.supply_items||[]);
+    const list=all.map(s=>{
+      const on=(v.supplies||{})[s.key];
+      return `<div${s.required?' style="font-weight:600"':''}>${on?'✅':'❌'} ${esc(s.label)}${s.required?' *':''}</div>`;
+    }).join('');
     body+=`<div class="checkitem"><div class="head"><span class="name">Vật tư đã tích</span>
-      <span class="badge ${(t>0&&d>=t)?'ok':'no'}">${d}/${t}</span></div>
-      <div class="supgrid">${list||'<div class="nophoto">— không có dữ liệu —</div>'}</div></div>`;
+      <span class="badge ${(r.total>0&&r.done>=r.total)?'ok':'no'}">${r.done}/${r.total} bắt buộc</span></div>
+      <div class="supgrid">${list||'<div class="nophoto">— không có dữ liệu —</div>'}</div>
+      <div class="nophoto">* ô dùng để xét “tích đủ”. Tổng đã tích: ${v.supplies_done||0}/${v.supplies_total||all.length}</div></div>`;
   }
   if(group==='ctkm' && (v.ctkm_names||[]).length){
     body+=`<div class="note">🎯 CTKM đã nghiệm thu: <b>${v.ctkm_names.map(esc).join(' · ')}</b></div>`;
