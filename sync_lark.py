@@ -27,16 +27,45 @@ except Exception:
 
 # ------- CẤU HÌNH CHECKLIST: key -> (tên cột trong Lark, nhãn hiển thị) -------
 CHECKLIST = [
-    ("front",         "Nghiệm thu trưng bày SP: Quầy mặt tiền",       "Trưng bày - Quầy mặt tiền"),
-    ("reception",     "Nghiệm thu quầy trưng bày: Quầy lễ tân",       "Trưng bày - Quầy lễ tân"),
-    ("stylist",       "Nghiệm thu quầy trưng bày: Khu Stylist",       "Trưng bày - Khu Stylist"),
-    ("relax",         "Vật tư Relax/Spa",                             "Vật tư Relax/Spa"),
-    ("und",           "Vật tư UND",                                   "Vật tư UND"),
-    ("ctkm",          "Nghiệm thu triển khai CTKM",                   "Triển khai CTKM"),
-    ("training",      "Nghiệm thu training/đào tạo tại salon",        "Training tại salon"),
-    ("price",         "Nghiệm thu ấn phẩm - Bảng giá",                "Ấn phẩm - Bảng giá"),
-    ("skinner_equip", "Nghiệm thu vật tư máy móc, quy trình Skinner", "Vật tư/máy móc Skinner"),
+    # --- Nhóm "Nghiệm thu trưng bày" (ảnh) ---
+    ("front",         "Nghiệm thu VM/Trưng bày: Quầy mặt tiền, khu chờ", "Trưng bày - Quầy mặt tiền, khu chờ"),
+    ("reception",     "Nghiệm thu VM/Trưng bày: Quầy lễ tân",            "Trưng bày - Quầy lễ tân"),
+    ("stylist",       "Nghiệm thu VM/Trưng bày: Khu Stylist",            "Trưng bày - Khu Stylist"),
+    ("price",         "Nghiệm thu VM/Trưng bày: ấn phẩm - Bảng giá",     "Trưng bày - Ấn phẩm, Bảng giá"),
+    # --- Nhóm "Nghiệm thu vật tư" (ảnh) ---
+    ("skinner_equip", "Nghiệm thu vật tư: Máy móc, quy trình Skinner",   "Vật tư - Máy móc, quy trình Skinner"),
+    # --- Nhóm "Nghiệm thu triển khai CTKM" (ảnh); CTKM 2 là tùy chọn ---
+    ("ctkm",          "Nghiệm thu triển khai CTKM",                      "Triển khai CTKM"),
+    ("ctkm2",         "Nghiệm thu triển khai CTKM 2",                    "Triển khai CTKM 2"),
+    # --- Training ---
+    ("training",      "Nghiệm thu training/đào tạo tại salon",           "Training tại salon"),
 ]
+# Mục tùy chọn: không tính vào tiến độ checklist (nhiều lượt chỉ có 1 CTKM).
+OPTIONAL_KEYS = {"ctkm2"}
+
+# Nhóm cột hiển thị trên báo cáo (tab Theo lượt đi).
+GROUPS = {
+    "trungbay": ["front", "reception", "stylist", "price"],
+    "vattu":    ["skinner_equip"],
+    "ctkm":     ["ctkm", "ctkm2"],
+}
+
+# Checkbox vật tư — "tích đủ" = tích hết các ô này.
+SUPPLIES = [
+    ("dungcu_phamau", "Dụng cụ pha màu (Bát nhuộm, lược nhuộm)",            "Dụng cụ pha màu"),
+    ("bangmau",       "Bảng màu",                                           "Bảng màu"),
+    ("mau_oxy",       "Màu nhuộm, Oxy",                                     "Màu nhuộm, Oxy"),
+    ("thuoc_uon",     "Thuốc uốn 1,2",                                      "Thuốc uốn 1,2"),
+    ("thuoc_ep",      "Thuốc Ép 1,2",                                       "Thuốc Ép 1,2"),
+    ("dungcu_uon",    "Dụng cụ uốn tóc (chun vòng, tăm bông, giấy uốn,..)", "Dụng cụ uốn tóc"),
+    ("relax",         "Vật tư Relax/Spa",                                   "Vật tư Relax/Spa"),
+    ("und",           "Vật tư UND",                                         "Vật tư UND"),
+    ("sku20",         "20 SKU bán chạy",                                    "20 SKU bán chạy"),
+]
+
+# Tên chương trình khuyến mãi salesup đã nghiệm thu
+COL_CTKM_NAME  = "CTKM Nghiệm thu (Chọn CT)"
+COL_CTKM_NAME2 = "CTKM Nghiệm thu 2 (Chọn CT)"
 COL_DATE     = "Ngày Training"
 COL_SUBMIT   = "Submitted on"
 COL_SALESUP  = "Nhân sự Training"
@@ -168,6 +197,15 @@ def field_text(val):
     return str(val)
 
 
+def field_bool(val):
+    """Đọc field checkbox (Lark trả bool)."""
+    if isinstance(val, bool):
+        return val
+    if isinstance(val, (int, float)):
+        return val != 0
+    return field_text(val).strip().lower() in ("true", "1", "yes", "có", "x", "checked")
+
+
 def field_attachments(val):
     """Nếu field là đính kèm -> trả list (file_token, name); không thì []."""
     out = []
@@ -241,7 +279,7 @@ def main():
             skipped += 1
             skipped_dates.append(fmt_date(f.get(COL_DATE)) or "(trống)")
             continue
-        items, done = {}, 0
+        items, done, req_total = {}, 0, 0
         for key, col, _label in CHECKLIST:
             val = f.get(col)
             atts = field_attachments(val)
@@ -252,14 +290,22 @@ def main():
                     images.append(rel)
                     img_total += 1
             is_done = bool(atts) or bool(field_text(val))
-            if is_done:
-                done += 1
+            if key not in OPTIONAL_KEYS:      # ctkm2 không tính vào tiến độ
+                req_total += 1
+                if is_done:
+                    done += 1
             items[key] = {
                 "done": is_done,
                 "images": images,
                 "count": len(atts),
                 "raw": "" if atts else field_text(val),
             }
+        # checkbox vật tư
+        supplies = {k: field_bool(f.get(col)) for k, col, _lb in SUPPLIES}
+        supplies_done = sum(1 for v in supplies.values() if v)
+        # tên CTKM đã nghiệm thu
+        ctkm_names = [n for n in (field_text(f.get(COL_CTKM_NAME)),
+                                  field_text(f.get(COL_CTKM_NAME2))) if n]
         visits.append({
             "id": rec.get("record_id", f"r{i+1}"),
             "date": fmt_date(f.get(COL_DATE)),
@@ -272,7 +318,11 @@ def main():
             "skinner_checked": field_text(f.get(COL_SK_CHECK)),
             "skinner_trained": field_text(f.get(COL_SK_TRAIN)),
             "items": items,
-            "completion": round(done / len(CHECKLIST), 4),
+            "supplies": supplies,
+            "supplies_done": supplies_done,
+            "supplies_total": len(SUPPLIES),
+            "ctkm_names": ctkm_names,
+            "completion": round(done / req_total, 4) if req_total else 0,
         })
 
     data = {
@@ -280,7 +330,10 @@ def main():
         "source": "lark",
         "month": SYNC_MONTH,
         "months": SYNC_MONTHS,
-        "checklist_items": [{"key": k, "label": lbl} for k, _c, lbl in CHECKLIST],
+        "checklist_items": [{"key": k, "label": lbl, "optional": k in OPTIONAL_KEYS}
+                            for k, _c, lbl in CHECKLIST],
+        "supply_items": [{"key": k, "label": lbl} for k, _c, lbl in SUPPLIES],
+        "groups": GROUPS,
         "visits": visits,
     }
     with open(os.path.join(HERE, "data.json"), "w", encoding="utf-8") as fp:

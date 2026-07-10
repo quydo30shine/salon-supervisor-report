@@ -45,6 +45,10 @@
   .mbtn:hover{border-color:var(--accent)}
   .mbtn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
   .mbtn .mcount{font-size:11px;opacity:.85;font-weight:400;margin-left:3px}
+  /* nút xem ảnh trong bảng + lưới checkbox vật tư */
+  .ibtn{background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:6px;padding:2px 7px;cursor:pointer;font-size:11px;margin-left:6px;white-space:nowrap}
+  .ibtn:hover{border-color:var(--accent);color:var(--accent)}
+  .supgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:4px 14px;margin-top:8px;font-size:13px}
   /* modal */
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow:auto;z-index:50}
   .overlay.on{display:flex}
@@ -113,12 +117,11 @@
           <th data-k="date">Ngày</th>
           <th data-k="salesup">Salesup</th>
           <th data-k="salon">Salon</th>
-          <th>Nhân sự đào tạo</th>
-          <th>Thiếu vật tư</th>
-          <th>Menu</th>
+          <th>Nghiệm thu trưng bày</th>
+          <th>Nghiệm thu vật tư</th>
           <th>Nghiệm thu CTKM</th>
-          <th data-k="photos">Ảnh</th>
-          <th>Chi tiết</th>
+          <th>Đào tạo</th>
+          <th>Vấn đề</th>
         </tr>
       </thead>
       <tbody id="rows"></tbody>
@@ -282,12 +285,49 @@ function setMonth(m){
 }
 
 function photosCount(v){ return CHECK.reduce((n,c)=>n+((v.items[c.key]||{}).count||0),0); }
-function doneCount(v){ return CHECK.reduce((n,c)=>n+((v.items[c.key]||{}).done?1:0),0); }
-// CTKM "Nghiệm thu / Triển khai CTKM": có ảnh (đính kèm hoặc đã tải) ở hạng mục ctkm
-function ctkmDeployed(v){ const it=(v.items||{}).ctkm||{}; return ((it.count||0)>0)||((it.images||[]).length>0); }
+// ctkm2 là mục tùy chọn -> không tính vào tiến độ checklist
+function reqCheck(){ return CHECK.filter(c=>!c.optional); }
+function doneCount(v){ return reqCheck().reduce((n,c)=>n+((v.items[c.key]||{}).done?1:0),0); }
+
+// --- nhóm cột nghiệm thu (lấy từ data.json, có fallback cho data cũ) ---
+const DEFAULT_GROUPS={trungbay:['front','reception','stylist','price'], vattu:['skinner_equip'], ctkm:['ctkm','ctkm2']};
+function G(name){ return (DATA&&DATA.groups&&DATA.groups[name]) || DEFAULT_GROUPS[name] || []; }
+function groupCount(v,keys){ return keys.reduce((n,k)=>n+((v.items[k]||{}).count||0),0); }
+
+function ctkmDeployed(v){ return groupCount(v,G('ctkm'))>0; }
 function deployLabel(ok){ return ok
   ? '<span style="color:var(--green);font-weight:600">Đã triển khai</span>'
   : '<span style="color:var(--red)">Chưa triển khai</span>'; }
+
+function okText(t){ return `<span style="color:var(--green);font-weight:600">${t}</span>`; }
+function noText(t){ return `<span style="color:var(--red)">${t}</span>`; }
+function photoBtn(v,group,n){ return `<button class="ibtn" onclick="event.stopPropagation();openPhotos('${esc(v.id)}','${group}')">🖼 ${n}</button>`; }
+
+function cellTrungbay(v){                       // có ảnh -> đã nghiệm thu
+  const n=groupCount(v,G('trungbay'));
+  return (n?okText('Đã nghiệm thu'):noText('Chưa nghiệm thu')) + (n?photoBtn(v,'trungbay',n):'');
+}
+function cellVattu(v){                          // tích đủ checkbox -> đã nghiệm thu; nút mở ảnh Skinner + trạng thái từng ô
+  const d=v.supplies_done||0, t=v.supplies_total||0, n=groupCount(v,G('vattu'));
+  const txt=(t>0&&d>=t) ? okText('Đã nghiệm thu') : noText(`Chưa nghiệm thu${t?` (${d}/${t})`:''}`);
+  return txt + photoBtn(v,'vattu',n);
+}
+function cellCtkm(v){                           // đã/chưa + tên CTKM + nút ảnh
+  const n=groupCount(v,G('ctkm')), names=v.ctkm_names||[];
+  const head=(n?okText('Đã nghiệm thu'):noText('Chưa nghiệm thu')) + (n?photoBtn(v,'ctkm',n):'');
+  const nm=names.length ? `<div style="font-size:12px;color:var(--muted);margin-top:3px">${names.map(esc).join(' · ')}</div>` : '';
+  return head+nm;
+}
+
+// "Vấn đề" = gộp Thiếu vật tư + Menu/Ấn phẩm; bỏ qua các đáp án phủ định (k, không, no…)
+const NO_ISSUE=new Set(['','-','0','k','ko','no','none','không','khong','không có','khong co','ko có','ko co']);
+function hasIssue(s){ return !NO_ISSUE.has((s||'').trim().toLowerCase()); }
+function fmtVisitIssues(v){
+  const out=[];
+  if(hasIssue(v.missing_materials)) out.push(`<div style="font-size:13px"><span style="color:var(--amber)">⚠️ Vật tư:</span> ${esc(v.missing_materials)}</div>`);
+  if(hasIssue(v.menu_issue))        out.push(`<div style="font-size:13px"><span style="color:var(--accent)">📋 Menu:</span> ${esc(v.menu_issue)}</div>`);
+  return out.length ? out.join('') : '<span style="color:var(--muted)">—</span>';
+}
 
 function render(){
   const fs=val('fSalesup'), fl=val('fSalon'), fd=val('fDate'), q=val('fSearch').toLowerCase().trim();
@@ -321,12 +361,11 @@ function renderVisits(){
       <td>${esc(v.date||'—')}</td>
       <td>${esc(v.salesup||'—')}</td>
       <td><b>${esc(v.salon||'—')}</b></td>
+      <td>${cellTrungbay(v)}</td>
+      <td>${cellVattu(v)}</td>
+      <td>${cellCtkm(v)}</td>
       <td>${fmtTrained(v.skinner_trained)}</td>
-      <td>${esc(v.missing_materials||'—')}</td>
-      <td>${esc(v.menu_issue||'—')}</td>
-      <td>${deployLabel(ctkmDeployed(v))}</td>
-      <td>${photosCount(v)} ảnh</td>
-      <td><button class="btn">Xem ›</button></td>`;
+      <td>${fmtVisitIssues(v)}</td>`;
     tr.onclick=()=>openModal(v);
     rows.appendChild(tr);
   });
@@ -424,7 +463,7 @@ function openSalonModal(r){
       <div class="checkitem" style="cursor:pointer" onclick="openVisitById('${esc(v.id)}')">
         <div class="head">
           <span class="name">${esc(v.date||'—')} • ${esc(v.salesup||'')}</span>
-          <span class="badge ${v.completion>=0.85?'ok':'no'}">${Math.round(v.completion*100)}% • ${doneCount(v)}/${CHECK.length}</span>
+          <span class="badge ${v.completion>=0.85?'ok':'no'}">${Math.round(v.completion*100)}% • ${doneCount(v)}/${reqCheck().length}</span>
         </div>
         <div class="nophoto">${photosCount(v)} ảnh${v.skinner_trained?' • Đào tạo: '+esc(v.skinner_trained):''}${v.missing_materials?' • ⚠️ thiếu: '+esc(v.missing_materials):''}</div>
       </div>`).join('')
@@ -593,10 +632,45 @@ function openModal(v){
   if(v.skinner_trained) extra+=`<div class="pill">Đào tạo: ${esc(v.skinner_trained)}</div>`;
   m.innerHTML=`
     <span class="close" onclick="closeModal()">×</span>
-    <h2>${esc(v.salon||'—')} <span class="pill" style="font-size:13px">${Math.round(v.completion*100)}% • ${doneCount(v)}/${CHECK.length}</span></h2>
+    <h2>${esc(v.salon||'—')} <span class="pill" style="font-size:13px">${Math.round(v.completion*100)}% • ${doneCount(v)}/${reqCheck().length}</span></h2>
     <div class="meta">${esc(v.date||'')} • Salesup: ${esc(v.salesup||'')} ${v.submitted_on?'• Nộp: '+esc(v.submitted_on):''}</div>
     ${extra?'<div style="margin-bottom:14px">'+extra+'</div>':''}
     ${items}`;
+  document.getElementById('overlay').classList.add('on');
+}
+// Modal xem ảnh theo nhóm: trưng bày / vật tư / CTKM
+function openPhotos(id, group){
+  const v=(DATA.visits||[]).find(x=>x.id===id); if(!v) return;
+  const titles={trungbay:'Nghiệm thu trưng bày', vattu:'Nghiệm thu vật tư', ctkm:'Nghiệm thu triển khai CTKM'};
+  let body='';
+  if(group==='vattu'){                                   // trạng thái từng ô checkbox
+    const d=v.supplies_done||0, t=v.supplies_total||0;
+    const list=(DATA.supply_items||[]).map(s=>
+      `<div>${(v.supplies||{})[s.key]?'✅':'❌'} ${esc(s.label)}</div>`).join('');
+    body+=`<div class="checkitem"><div class="head"><span class="name">Vật tư đã tích</span>
+      <span class="badge ${(t>0&&d>=t)?'ok':'no'}">${d}/${t}</span></div>
+      <div class="supgrid">${list||'<div class="nophoto">— không có dữ liệu —</div>'}</div></div>`;
+  }
+  if(group==='ctkm' && (v.ctkm_names||[]).length){
+    body+=`<div class="note">🎯 CTKM đã nghiệm thu: <b>${v.ctkm_names.map(esc).join(' · ')}</b></div>`;
+  }
+  G(group).forEach(k=>{
+    const c=CHECK.find(x=>x.key===k)||{label:k};
+    const it=v.items[k]||{images:[],count:0};
+    let thumbs;
+    if(it.images&&it.images.length)
+      thumbs='<div class="thumbs">'+it.images.map(src=>
+        `<img src="${esc(src)}" loading="lazy" onerror="this.style.display='none'" onclick="zoom('${esc(src)}')">`).join('')+'</div>';
+    else if(it.count) thumbs=`<div class="nophoto">📎 ${it.count} ảnh (chưa đồng bộ từ Lark)</div>`;
+    else thumbs='<div class="nophoto">— chưa có ảnh —</div>';
+    body+=`<div class="checkitem"><div class="head"><span class="name">${esc(c.label)}</span>
+      <span class="badge ${it.count?'ok':'no'}">${it.count ? '✓ '+it.count+' ảnh' : '✗ Thiếu'}</span></div>${thumbs}</div>`;
+  });
+  const m=document.getElementById('modal');
+  m.innerHTML=`<span class="close" onclick="closeModal()">×</span>
+    <h2>${titles[group]||'Ảnh nghiệm thu'}</h2>
+    <div class="meta">${esc(v.date||'')} • ${esc(v.salon||'')} • Salesup: ${esc(v.salesup||'')}</div>
+    ${body}`;
   document.getElementById('overlay').classList.add('on');
 }
 function closeModal(){ document.getElementById('overlay').classList.remove('on'); }
