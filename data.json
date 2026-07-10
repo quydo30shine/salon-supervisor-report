@@ -1,5 +1,5 @@
 {
-  "generated_at": "10/07/2026 10:51",
+  "generated_at": "10/07/2026 11:03",
   "source": "lark",
   "month": "2026-06,2026-07",
   "months": [
@@ -51,39 +51,48 @@
   "supply_items": [
     {
       "key": "dungcu_phamau",
-      "label": "Dụng cụ pha màu"
+      "label": "Dụng cụ pha màu",
+      "required": false
     },
     {
       "key": "bangmau",
-      "label": "Bảng màu"
+      "label": "Bảng màu",
+      "required": false
     },
     {
       "key": "mau_oxy",
-      "label": "Màu nhuộm, Oxy"
+      "label": "Màu nhuộm, Oxy",
+      "required": false
     },
     {
       "key": "thuoc_uon",
-      "label": "Thuốc uốn 1,2"
+      "label": "Thuốc uốn 1,2",
+      "required": false
     },
     {
       "key": "thuoc_ep",
-      "label": "Thuốc Ép 1,2"
+      "label": "Thuốc Ép 1,2",
+      "required": false
     },
     {
       "key": "dungcu_uon",
-      "label": "Dụng cụ uốn tóc"
+      "label": "Dụng cụ uốn tóc",
+      "required": false
     },
     {
       "key": "relax",
-      "label": "Vật tư Relax/Spa"
+      "label": "Vật tư Relax/Spa",
+      "required": true
     },
     {
       "key": "und",
-      "label": "Vật tư UND"
+      "label": "Vật tư UND",
+      "required": true
     },
     {
       "key": "sku20",
-      "label": "20 SKU bán chạy"
+      "label": "20 SKU bán chạy",
+      "required": false
     }
   ],
   "groups": {
