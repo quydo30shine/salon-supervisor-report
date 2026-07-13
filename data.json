@@ -1,5 +1,5 @@
 {
-  "generated_at": "13/07/2026 10:39",
+  "generated_at": "13/07/2026 12:36",
   "source": "lark",
   "month": "2026-06,2026-07",
   "months": [
@@ -13865,6 +13865,190 @@
         "relax": false,
         "und": true,
         "sku20": true
+      },
+      "supplies_done": 2,
+      "supplies_total": 9,
+      "ctkm_names": [
+        "CTKM Clearstock, đẩy hàng tồn"
+      ],
+      "completion": 0.8571
+    },
+    {
+      "id": "rec27MluHGgvOI",
+      "date": "10/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783914360000",
+      "salesup": "Nguyễn Thị Thanh Tâm",
+      "salon": "29 HB",
+      "missing_materials": "",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "3 stylist\n3 skinner \n1 sup",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/HlewbIp8noh5ibx3pL0lhWWog7c.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/RbiPbM7tJoASTOxap3llYyTIg8f.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/JJQbbg4F1oZv32xPpVlldYJ9g6e.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/F2UBbWIP6oFi3RxvkB8lrDELgGK.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/EftMb1XLhotu9dxMAtYlnGIzghg.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/Pp1Wb0vfZoPUMVxmriClhRf4gie.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "ctkm2": {
+          "done": false,
+          "images": [],
+          "count": 0,
+          "raw": ""
+        },
+        "training": {
+          "done": false,
+          "images": [],
+          "count": 0,
+          "raw": ""
+        }
+      },
+      "supplies": {
+        "dungcu_phamau": false,
+        "bangmau": false,
+        "mau_oxy": false,
+        "thuoc_uon": false,
+        "thuoc_ep": false,
+        "dungcu_uon": false,
+        "relax": true,
+        "und": true,
+        "sku20": true
+      },
+      "supplies_done": 3,
+      "supplies_total": 9,
+      "ctkm_names": [
+        "CTKM Clearstock, đẩy hàng tồn"
+      ],
+      "completion": 0.8571
+    },
+    {
+      "id": "rec27MlxNsKjUU",
+      "date": "11/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1783914536000",
+      "salesup": "Nguyễn Thị Thanh Tâm",
+      "salon": "80 PL BD",
+      "missing_materials": "",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "4 stylist\n1 sup\n1 skinner",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/R9yWbLQQron0fJxClQ1lLf1DgBf.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/M7OqbmEAjogcCCxPvhclBoQ7grh.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/J5h7bKQguoO9TpxxPc7l6MvcgOb.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/IBBdbPkNMoKBsBxe1FxlwyTug4c.JPEG",
+            "images/I9awbX8iuo4Jdhx1OPslELYkgsh.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/RE8XbpISOojblyxn2Vvl53zugZg.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/DwCPbcynVozMu6x8OKrlVl4Sgmc.JPEG",
+            "images/MknQbN7N6oOCwgxQOVglbr6OgIb.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "ctkm2": {
+          "done": false,
+          "images": [],
+          "count": 0,
+          "raw": ""
+        },
+        "training": {
+          "done": false,
+          "images": [],
+          "count": 0,
+          "raw": ""
+        }
+      },
+      "supplies": {
+        "dungcu_phamau": false,
+        "bangmau": false,
+        "mau_oxy": false,
+        "thuoc_uon": false,
+        "thuoc_ep": false,
+        "dungcu_uon": false,
+        "relax": true,
+        "und": true,
+        "sku20": false
       },
       "supplies_done": 2,
       "supplies_total": 9,
