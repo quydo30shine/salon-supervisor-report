@@ -1,5 +1,5 @@
 {
-  "generated_at": "15/07/2026 22:25",
+  "generated_at": "16/07/2026 11:58",
   "source": "lark",
   "month": "2026-06,2026-07",
   "months": [
@@ -14056,6 +14056,100 @@
         "CTKM Clearstock, đẩy hàng tồn"
       ],
       "completion": 0.8571
+    },
+    {
+      "id": "rec27NvqyDuhrc",
+      "date": "15/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1784167681000",
+      "salesup": "Ngô Thị Mai Loan",
+      "salon": "1180 QT",
+      "missing_materials": "",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "1 sup Tú mới, 3 skn Hồng, Loan, Thảo",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/Ujf1bZTNnoktoPxqUFllHeUTgBe.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/IVYubP7DtohRmFxBfkYlrUA9gdg.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/WzEjbcElaohWZbxQeuTl5vO0gT0.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/MK75b2RWmoGsfWxDJsYlcHvSgQg.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/Qm5fbGDdAoQr8gxYdEIlTEEfgPc.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/BLPgbEUo2oNMRJx7LzIlFa1GgDg.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "ctkm2": {
+          "done": false,
+          "images": [],
+          "count": 0,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/VdHeb5wAKowVvhx6W99lb5JngI4.JPEG",
+            "images/XDahbkAREoBChVxglsMlXtTaghb.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        }
+      },
+      "supplies": {
+        "dungcu_phamau": false,
+        "bangmau": false,
+        "mau_oxy": false,
+        "thuoc_uon": false,
+        "thuoc_ep": false,
+        "dungcu_uon": false,
+        "relax": true,
+        "und": true,
+        "sku20": true
+      },
+      "supplies_done": 3,
+      "supplies_total": 9,
+      "ctkm_names": [
+        "CTKM Clearstock, đẩy hàng tồn"
+      ],
+      "completion": 1.0
     }
   ]
 }
