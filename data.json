@@ -1,5 +1,5 @@
 {
-  "generated_at": "20/07/2026 10:49",
+  "generated_at": "20/07/2026 12:38",
   "source": "lark",
   "month": "2026-06,2026-07",
   "months": [
@@ -16122,6 +16122,101 @@
       "supplies_total": 9,
       "ctkm_names": [
         "CTKM Clearstock, đẩy hàng tồn"
+      ],
+      "completion": 1.0
+    },
+    {
+      "id": "rec27P7hjSbzd1",
+      "date": "18/07/2026",
+      "ym": "2026-07",
+      "submitted_on": "1784519318000",
+      "salesup": "Ngô Thị Mai Loan",
+      "salon": "575 AC",
+      "missing_materials": "",
+      "menu_issue": "",
+      "skinner_checked": "",
+      "skinner_trained": "2 skn Thảo, Hoa",
+      "items": {
+        "front": {
+          "done": true,
+          "images": [
+            "images/QWbTb4AfMo6HSfx678ylytwogEb.JPEG",
+            "images/AqjobvpSxoq9WLxhTlVltCtQgog.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        },
+        "reception": {
+          "done": true,
+          "images": [
+            "images/G7ZNbv6yYoUl3SxiAg1l19Vgggd.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "stylist": {
+          "done": true,
+          "images": [
+            "images/TDivb066mo4gFhxi0XKlbSDwgDh.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "price": {
+          "done": true,
+          "images": [
+            "images/S7D8beuxXozdIBxTmnIlgjPBgef.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "skinner_equip": {
+          "done": true,
+          "images": [
+            "images/J6EHbjG2xo1Lucx4gDYlUdw8g8b.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "ctkm": {
+          "done": true,
+          "images": [
+            "images/BXqVbKV1Zo9pAXxzu4Cl3zvugCc.JPEG"
+          ],
+          "count": 1,
+          "raw": ""
+        },
+        "ctkm2": {
+          "done": false,
+          "images": [],
+          "count": 0,
+          "raw": ""
+        },
+        "training": {
+          "done": true,
+          "images": [
+            "images/Ie6RbeleGoa5zIxuUkClgiPYgdd.JPEG",
+            "images/LzqbbtFTJo2culx30p0l65c1gzh.JPEG"
+          ],
+          "count": 2,
+          "raw": ""
+        }
+      },
+      "supplies": {
+        "dungcu_phamau": false,
+        "bangmau": false,
+        "mau_oxy": false,
+        "thuoc_uon": false,
+        "thuoc_ep": false,
+        "dungcu_uon": false,
+        "relax": true,
+        "und": true,
+        "sku20": true
+      },
+      "supplies_done": 3,
+      "supplies_total": 9,
+      "ctkm_names": [
+        "Nghiệm thu tag giá"
       ],
       "completion": 1.0
     }
