@@ -313,9 +313,12 @@ function vattuReq(v){
   if(req.length) return {done:req.filter(s=>(v.supplies||{})[s.key]).length, total:req.length};
   return {done:v.supplies_done||0, total:v.supplies_total||0};   // fallback data cũ
 }
-function cellVattu(v){                          // tích đủ -> đã nghiệm thu; nút mở ảnh Skinner + trạng thái từng ô
+// Lượt đi = đã nghiệm thu. Thiếu ô tích chỉ nghĩa là salon thiếu vật tư -> ghi chú, không phải "chưa nghiệm thu".
+function cellVattu(v){
   const r=vattuReq(v), n=groupCount(v,G('vattu'));
-  const txt=(r.total>0&&r.done>=r.total) ? okText('Đã nghiệm thu') : noText(`Chưa nghiệm thu${r.total?` (${r.done}/${r.total})`:''}`);
+  const lack = r.total>0 && r.done<r.total;
+  const txt = okText('Đã nghiệm thu') +
+    (lack ? ` <span style="color:var(--amber)">(thiếu vật tư) ${r.done}/${r.total}</span>` : '');
   return txt + photoBtn(v,'vattu',n);
 }
 function cellCtkm(v){                           // đã/chưa + tên CTKM + nút ảnh
