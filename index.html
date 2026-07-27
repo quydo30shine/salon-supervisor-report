@@ -187,7 +187,27 @@ let sortKey = 'date', sortDir = 1;
 let TAB = 'visits';
 let MONTH = '';
 let ASSIGN = [], TON = 1;
+let ASG_ALL = null;                 // toàn bộ assignments.json (có thể theo tháng)
 const ASSIGN_MAP = new Map();
+
+// Lấy khối assignments theo tháng đang chọn (hỗ trợ cả cấu trúc cũ 1 tháng).
+function assignBlock(month){
+  if(ASG_ALL && ASG_ALL.months){
+    return ASG_ALL.months[month] || ASG_ALL.months[Object.keys(ASG_ALL.months)[0]] || {assignments:[],target_online:1};
+  }
+  return ASG_ALL || {assignments:[],target_online:1};
+}
+function allAssignments(){
+  if(ASG_ALL && ASG_ALL.months) return Object.values(ASG_ALL.months).flatMap(b=>b.assignments||[]);
+  return (ASG_ALL && ASG_ALL.assignments) || [];
+}
+// Áp assignments của tháng hiện tại vào ASSIGN / ASSIGN_MAP / TON.
+function applyAssign(){
+  const b=assignBlock(MONTH);
+  ASSIGN=b.assignments||[]; TON=b.target_online||1;
+  ASSIGN_MAP.clear();
+  ASSIGN.forEach(x=>ASSIGN_MAP.set(skey(x.salon),x));
+}
 
 // === MỤC TIÊU ĐÀO TẠO THÁNG — sửa tay mỗi tháng ===
 // key = tên Salesup (đúng như cột Salesup), value = số nhân sự cần đào tạo trong tháng. 0 = chưa đặt.
@@ -207,8 +227,7 @@ function load(){
     fetch('assignments.json?_=' + Date.now()).then(r=>r.json()).catch(()=>({target_visits:3,assignments:[]}))
   ]).then(([d,a])=>{
     DATA=d; CHECK=d.checklist_items||[];
-    ASSIGN=a.assignments||[]; TON=a.target_online||1;
-    ASSIGN.forEach(x=>ASSIGN_MAP.set(skey(x.salon),x));
+    ASG_ALL=a;
     init();
   }).catch(e=>{ document.getElementById('rows').innerHTML =
     '<tr><td colspan="6" class="empty">Không đọc được data.json — chạy đồng bộ trước.</td></tr>'; });
@@ -222,9 +241,10 @@ function init(){
       '<div class="src-warn">⚠️ Đây là dữ liệu MẪU từ CSV, ảnh chưa hiển thị. Sau khi nối Lark API và chạy đồng bộ, ảnh thật sẽ tự xuất hiện.</div>';
   }
   // fill filters
-  const sups=[...new Set([...(DATA.visits||[]).map(v=>v.salesup), ...ASSIGN.map(a=>a.supervisor)].filter(Boolean))].sort();
+  const sups=[...new Set([...(DATA.visits||[]).map(v=>v.salesup), ...allAssignments().map(a=>a.supervisor)].filter(Boolean))].sort();
   fillSelect('fSalesup', sups);
   buildMonthBtns();                                    // tạo nút T6/T7 + đặt MONTH mặc định
+  applyAssign();                                       // nạp assignments đúng tháng mặc định
   const vsM=(DATA.visits||[]).filter(v=>ymOf(v)===MONTH);
   fillSelect('fSalon', [...new Set(vsM.map(v=>v.salon).filter(Boolean))].sort());
   fillSelect('fDate',  [...new Set(vsM.map(v=>v.date).filter(Boolean))].sort());
@@ -277,6 +297,7 @@ function buildMonthBtns(){
 }
 function setMonth(m){
   MONTH=m;
+  applyAssign();                                       // đổi assignments theo tháng
   document.querySelectorAll('#monthBtns .mbtn').forEach(b=>b.classList.toggle('on', b.dataset.m===m));
   const vs=(DATA.visits||[]).filter(v=>ymOf(v)===m);
   refillSelect('fSalon', [...new Set(vs.map(v=>v.salon).filter(Boolean))].sort());
